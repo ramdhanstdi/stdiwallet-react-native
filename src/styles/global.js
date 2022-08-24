@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {PRIMARY_COLOR, TEXT_DARK, TEXT_LIGHT} from './const';
+import {PRIMARY_COLOR, SECONDARY_COLOR, TEXT_DARK, TEXT_LIGHT} from './const';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: TEXT_LIGHT,
     alignItems: 'center',
-    height: Dimensions.get('screen').height - 157,
+    height: Dimensions.get('screen').height,
   },
   authTitle: {
     fontSize: 24,
@@ -27,7 +27,23 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 23,
     fontWeight: '400',
-    marginBottom: 50,
+    color: TEXT_DARK,
+  },
+  inputWrap: {
+    flex: 1,
+  },
+  questionText: {
+    fontSize: 16,
+    lineHeight: 23,
+    fontWeight: '400',
+    color: TEXT_DARK,
+    marginVertical: 15,
+  },
+  linkText: {
+    fontSize: 16,
+    lineHeight: 23,
+    fontWeight: '400',
+    color: PRIMARY_COLOR,
   },
 });
 

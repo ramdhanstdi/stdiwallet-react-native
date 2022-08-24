@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
-import {PRIMARY_COLOR, TEXT_DARK} from '../styles/const';
+import {PRIMARY_COLOR, SECONDARY_COLOR, TEXT_DARK} from '../styles/const';
 
 const Auth = () => {
   return (
@@ -14,7 +14,7 @@ const styleLocal = StyleSheet.create({
   text: {
     fontSize: 26,
     fontWeight: '700',
-    color: TEXT_DARK,
+    color: SECONDARY_COLOR,
   },
   wrapper: {
     alignItems: 'center',
