@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     paddingVertical: 35,
   },
   textSmall: {
+    textAlign: 'center',
     fontSize: 16,
     lineHeight: 23,
     fontWeight: '400',

@@ -16,7 +16,14 @@ const registerSchema = Yup.object().shape({
   password: Yup.string().min(8).required('Required'),
 });
 
-const FormRegister = ({errors, handleChange, handleBlur, handleSubmit}) => {
+//Form Formik with All Params
+const FormRegister = ({
+  errors,
+  handleChange,
+  handleBlur,
+  handleSubmit,
+  navigation,
+}) => {
   return (
     <View style={styles.formikWrap}>
       <View>
@@ -28,7 +35,7 @@ const FormRegister = ({errors, handleChange, handleBlur, handleSubmit}) => {
           type="text"
           name="username"
         />
-        {errors.email ? (
+        {errors.esername ? (
           <Text style={styles.warningForm}>
             <ErrorMessage name="username" />
           </Text>
@@ -55,7 +62,7 @@ const FormRegister = ({errors, handleChange, handleBlur, handleSubmit}) => {
           secure={true}
           name="password"
         />
-        {errors.email ? (
+        {errors.password ? (
           <Text style={styles.warningForm}>
             <ErrorMessage name="password" />
           </Text>
@@ -65,14 +72,24 @@ const FormRegister = ({errors, handleChange, handleBlur, handleSubmit}) => {
         <ButtonAuth action={handleSubmit} title="submit" text="Sign Up" />
         <Text style={styles.questionText}>
           Already have an account? Let’s
-          <Text style={styles.linkText}> Login</Text>
+          <Text
+            style={styles.linkText}
+            onPress={() => navigation.navigate('Login')}>
+            {' '}
+            Login
+          </Text>
         </Text>
       </View>
     </View>
   );
 };
 
-const Register = () => {
+const Register = ({navigation}) => {
+  const onSubmit = val => {
+    console.log(val);
+    navigation.navigate('CreatePin');
+    //disini untuk fungsi register lempar ke Crate pin
+  };
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>
@@ -86,8 +103,9 @@ const Register = () => {
           </Text>
           <Formik
             validationSchema={registerSchema}
-            initialValues={{email: '', username: '', password: ''}}>
-            {props => <FormRegister {...props} />}
+            initialValues={{email: '', username: '', password: ''}}
+            onSubmit={onSubmit}>
+            {props => <FormRegister {...props} navigation={navigation} />}
           </Formik>
         </View>
       </ScrollView>
