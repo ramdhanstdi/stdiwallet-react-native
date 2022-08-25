@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, Button, StyleSheet} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import Auth from '../component/Auth';
 import Input from '../component/Input';
@@ -47,10 +47,10 @@ const ForgotPassword = ({navigation}) => {
         <Auth />
         <View style={styles.wrapperBody}>
           <View>
-            <Text style={styles.authTitle}>Sign Up</Text>
+            <Text style={styles.authTitle}>Reset Password</Text>
           </View>
           <Text style={styles.textSmall}>
-            Create your account to access STD iWallet.
+            Enter your iWallet e-mail so we can send you a password reset link.
           </Text>
           <Formik
             validationSchema={ForgotSchema}

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     fontWeight: '400',
     color: TEXT_DARK,
+    paddingHorizontal: 15,
   },
   actionFormik: {
     alignItems: 'center',

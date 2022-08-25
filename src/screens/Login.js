@@ -1,4 +1,4 @@
-import {View, Text, ScrollView, Button, StyleSheet} from 'react-native';
+import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import React from 'react';
 import Auth from '../component/Auth';
 import Input from '../component/Input';
@@ -73,6 +73,11 @@ const FormLogin = ({
 };
 
 const Login = ({navigation}) => {
+  const onSubmit = val => {
+    console.log(val);
+    navigation.navigate('Home');
+    //disini untuk fungsi register lempar ke Crate pin
+  };
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>
@@ -87,7 +92,8 @@ const Login = ({navigation}) => {
           </Text>
           <Formik
             validationSchema={loginSchema}
-            initialValues={{email: '', password: ''}}>
+            initialValues={{email: '', password: ''}}
+            onSubmit={onSubmit}>
             {props => <FormLogin {...props} navigation={navigation} />}
           </Formik>
         </View>

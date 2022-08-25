@@ -35,7 +35,7 @@ const FormRegister = ({
           type="text"
           name="username"
         />
-        {errors.esername ? (
+        {errors.username ? (
           <Text style={styles.warningForm}>
             <ErrorMessage name="username" />
           </Text>

@@ -7,6 +7,7 @@ import Login from './src/screens/Login';
 import CreatePin from './src/screens/CreatePin';
 import ForgotPassword from './src/screens/ForgotPassword';
 import ResetPassword from './src/screens/ResetPassword';
+import Home from './src/screens/Home';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,11 @@ const App = () => {
           options={{headerShown: false}}
           name="ResetPassword"
           component={ResetPassword}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Home"
+          component={Home}
         />
       </Stack.Navigator>
     </NavigationContainer>
