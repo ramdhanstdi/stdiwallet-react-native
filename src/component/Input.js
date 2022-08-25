@@ -3,7 +3,15 @@ import React from 'react';
 import {TEXT_DARK} from '../styles/const';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Input = ({icon, placeholder, type, secure}) => {
+const Input = ({
+  icon,
+  placeholder,
+  type,
+  secure,
+  onChangeText,
+  onBlur,
+  name,
+}) => {
   return (
     <View style={styleLocal.wrapForm}>
       <View style={styleLocal.icons}>
@@ -11,6 +19,8 @@ const Input = ({icon, placeholder, type, secure}) => {
       </View>
       <View style={styleLocal.inputBorder}>
         <TextInput
+          onChangeText={onChangeText(name)}
+          onBlur={onBlur(name)}
           style={styleLocal.text}
           placeholder={placeholder}
           type={type}
@@ -26,7 +36,7 @@ const styleLocal = StyleSheet.create({
     width: Dimensions.get('screen').width,
     paddingHorizontal: 18,
     flexDirection: 'row',
-    marginTop: 50,
+    marginTop: 40,
   },
   inputBorder: {
     borderBottomColor: TEXT_DARK,

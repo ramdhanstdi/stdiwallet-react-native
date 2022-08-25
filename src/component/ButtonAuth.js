@@ -8,11 +8,16 @@ import {
 import React from 'react';
 import {SECONDARY_COLOR, TEXT_LIGHT} from '../styles/const';
 
-const ButtonAuth = ({text}) => {
+const ButtonAuth = ({text, action, title}) => {
   return (
-    <TouchableOpacity style={styleLocal.buttonWrap}>
-      <Text style={styleLocal.text}>{text}</Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity
+        style={styleLocal.buttonWrap}
+        onPress={action}
+        title={title}>
+        <Text style={styleLocal.text}>{text}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

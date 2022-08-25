@@ -1,5 +1,11 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {PRIMARY_COLOR, SECONDARY_COLOR, TEXT_DARK, TEXT_LIGHT} from './const';
+import {
+  PRIMARY_COLOR,
+  SECONDARY_COLOR,
+  TEXT_DARK,
+  TEXT_LIGHT,
+  WARNING_COLOR,
+} from './const';
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -29,8 +35,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: TEXT_DARK,
   },
-  inputWrap: {
+  actionFormik: {
+    alignItems: 'center',
+  },
+  formikWrap: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   questionText: {
     fontSize: 16,
@@ -44,6 +54,10 @@ const styles = StyleSheet.create({
     lineHeight: 23,
     fontWeight: '400',
     color: PRIMARY_COLOR,
+  },
+  warningForm: {
+    paddingLeft: 20,
+    color: WARNING_COLOR,
   },
 });
 
