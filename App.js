@@ -8,45 +8,46 @@ import CreatePin from './src/screens/CreatePin';
 import ForgotPassword from './src/screens/ForgotPassword';
 import ResetPassword from './src/screens/ResetPassword';
 import Home from './src/screens/Home';
+import CreatePinSuccess from './src/screens/CreatePinSuccess';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Register"
-          component={Register}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="CreatePin"
-          component={CreatePin}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="ForgotPassword"
-          component={ForgotPassword}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="ResetPassword"
-          component={ResetPassword}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Home"
-          component={Home}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+  return ( <Home/>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="Login"
+    //       component={Login}
+    //     />
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="Register"
+    //       component={Register}
+    //     />
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="CreatePin"
+    //       component={CreatePin}
+    //     />
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="ForgotPassword"
+    //       component={ForgotPassword}
+    //     />
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="ResetPassword"
+    //       component={ResetPassword}
+    //     />
+    //     <Stack.Screen
+    //       options={{headerShown: false}}
+    //       name="Home"
+    //       component={Home}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 };
 

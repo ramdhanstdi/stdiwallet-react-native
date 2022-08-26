@@ -6,69 +6,58 @@ import {
   TextInput,
   Dimensions,
   Pressable,
-  Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import React, {useRef} from 'react';
 import Auth from '../component/Auth';
-import Input from '../component/Input';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import {ErrorMessage, Formik} from 'formik';
-import {SECONDARY_COLOR, TEXT_DARK} from '../styles/const';
+import {SECONDARY_COLOR, TEXT_DARK, TEXT_LIGHT} from '../styles/const';
 import * as Yup from 'yup';
+import PinView from 'react-native-pin-view';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export const FormPin = ({
-  handleBlur,
-  handleSubmit,
-  handleChange,
-  pin,
-  setPin,
-  maxlength,
-}) => {
-  const [focus, setFocus] = React.useState(false);
-  const handleOnPress = () => {
-    setFocus(true);
-    textInputRef?.current?.focus();
-  };
-  const handleOnBlur = () => {
-    setFocus(false);
-  };
-  const pinDigit = new Array(maxlength).fill(0);
-  const textInputRef = useRef(null);
-  const toPinDigitInput = (_value, index) => {
-    const emptyInputChar = ' ';
-    const digit = pin[index] || emptyInputChar;
-    return (
-      <View style={styleLocal.inputDigit} key={index}>
-        <Text style={styleLocal.inputText}>{digit}</Text>
-      </View>
-    );
-  };
-
+export const FormPin = ({handleSubmit, setPin}) => {
+  const refPin = React.useRef(null);
+  const [show, setShow] = React.useState(false);
   return (
-    <View style={styles.formikWrap}>
-      <Pressable style={styleLocal.digitContainer} onPress={handleOnPress}>
-        {pinDigit.map(toPinDigitInput)}
-      </Pressable>
-      <View>
-        <View style={styleLocal.hiddenText}>
-          <TextInput
-            value={pin}
-            onChangeText={setPin}
-            maxlength={maxlength}
-            keyboardType="number-pad"
-            returnkeyType="done"
-            textContentType="oneTimeCode"
-            ref={textInputRef}
-            onblur={handleOnBlur}
-            name="pin"
-          />
+    <>
+      <View style={styles.formikWrap}>
+        <PinView
+          pinLength={6}
+          ref={refPin}
+          onValueChange={value => setPin(value)}
+          inputSize={40}
+          inputAreaStyle={{marginTop: 50, marginBottom: 30}}
+          inputViewFilledStyle={{backgroundColor: SECONDARY_COLOR}}
+          showInputText={show}
+          buttonTextStyle={{color: TEXT_LIGHT, fontSize: 32}}
+          buttonViewStyle={{backgroundColor: SECONDARY_COLOR}}
+          onButtonPress={key => {
+            if (key === 'custom_left') {
+              refPin.current.clearAll();
+            }
+            if (key === 'custom_right') {
+              setShow(!show);
+            }
+          }}
+          customLeftButton={
+            <Icon name="chevron-left" size={30} color={SECONDARY_COLOR} />
+          }
+          customRightButton={
+            show ? (
+              <Icon name="eye" size={30} color={SECONDARY_COLOR} />
+            ) : (
+              <Icon name="eye-slash" size={30} color={SECONDARY_COLOR} />
+            )
+          }
+        />
+        <View style={styles.actionFormik}>
+          <ButtonAuth action={handleSubmit} title="submit" text="Confirm" />
         </View>
       </View>
-      <View style={styles.actionFormik}>
-        <ButtonAuth action={handleSubmit} title="submit" text="Confirm" />
-      </View>
-    </View>
+    </>
   );
 };
 
@@ -79,6 +68,7 @@ const CreatePin = ({navigation}) => {
   const onSubmit = val => {
     console.log(val);
     console.log(pin);
+    navigation.navigate('Login');
     //disini untuk fungsi register lempar ke Crate pin
   };
   return (
@@ -93,17 +83,8 @@ const CreatePin = ({navigation}) => {
             Create a PIN that’s contain 6 digits number for security purpose in
             STD iWallet.
           </Text>
-          <Formik initialValues={{pin: ''}} onSubmit={onSubmit}>
-            {props => (
-              <FormPin
-                {...props}
-                navigation={navigation}
-                setPinReady={setPinReady}
-                setPin={setPin}
-                pin={pin}
-                maxlength={maxlength}
-              />
-            )}
+          <Formik initialValues={{pin: pin}} onSubmit={onSubmit}>
+            {props => <FormPin {...props} setPin={setPin} pin={pin} />}
           </Formik>
         </View>
       </ScrollView>
@@ -142,3 +123,59 @@ const styleLocal = StyleSheet.create({
     color: TEXT_DARK,
   },
 });
+
+// export const FormPin = ({
+//   handleBlur,
+//   handleSubmit,
+//   handleChange,
+//   pin,
+//   setPin,
+//   maxlength,
+// }) => {
+//   const [focus, setFocus] = React.useState(false);
+//   const handleOnPress = () => {
+//     setFocus(true);
+//     textInputRef?.current?.focus();
+//   };
+//   const handleOnBlur = () => {
+//     setFocus(false);
+//   };
+//   const pinDigit = new Array(maxlength).fill(0);
+//   const textInputRef = useRef(null);
+//   const toPinDigitInput = (_value, index) => {
+//     const emptyInputChar = ' ';
+//     const digit = pin[index] || emptyInputChar;
+//     return (
+//       <View style={styleLocal.inputDigit} key={index}>
+//         <Text style={styleLocal.inputText}>{digit}</Text>
+//       </View>
+//     );
+//   };
+
+//   return (
+//     <View style={styles.formikWrap}>
+//       <Pressable style={styleLocal.digitContainer} onPress={handleOnPress}>
+//         {pinDigit.map(toPinDigitInput)}
+//       </Pressable>
+//       <View>
+//         <View style={styleLocal.hiddenText}>
+//           <TextInput
+//             value={pin}
+//             onChangeText={setPin}
+//             maxlength={maxlength}
+//             keyboardType="number-pad"
+//             returnkeyType="done"
+//             textContentType="oneTimeCode"
+//             ref={textInputRef}
+//             onblur={handleOnBlur}
+//             name="pin"
+//             maxLength={6}
+//           />
+//         </View>
+//       </View>
+//       <View style={styles.actionFormik}>
+//         <ButtonAuth action={handleSubmit} title="submit" text="Confirm" />
+//       </View>
+//     </View>
+//   );
+// };
