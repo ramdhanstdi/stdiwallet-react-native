@@ -13,6 +13,7 @@ import Input from '../component/Input';
 import {ErrorMessage, Formik} from 'formik';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Card from '../component/Card';
+import styles from '../styles/global';
 
 const data = [
   {name: 'Alex', type: '08435734', image: null},
@@ -55,6 +56,7 @@ const FinReceiver = ({navigation}) => {
       <Formik onSubmit={onSubmit} initialValues={{searching: ''}}>
         {props => <FormInput {...props} />}
       </Formik>
+      <Text style={styles.homeText18px}> All Contact</Text>
       <FlatList
         nestedScrollEnabled
         data={data}

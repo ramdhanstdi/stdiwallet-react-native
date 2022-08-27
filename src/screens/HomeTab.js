@@ -7,6 +7,7 @@ import {SECONDARY_COLOR} from '../styles/const';
 import Home from './Home';
 import Transaction from './Transaction';
 import History from './History';
+import Profile from './Profile';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -43,6 +44,17 @@ const HomeTab = () => {
         }}
         name="History"
         component={History}
+      />
+      <BottomTab.Screen
+        options={{
+          tabBarActiveTintColor: SECONDARY_COLOR,
+          tabBarIcon: ({focused, color, size}) => (
+            <Icon name="user" color={color} size={size} />
+          ),
+          headerShown: false,
+        }}
+        name="Profile"
+        component={Profile}
       />
     </BottomTab.Navigator>
   );

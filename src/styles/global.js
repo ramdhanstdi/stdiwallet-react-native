@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 25,
     color: TEXT_DARK,
+    marginLeft: 10,
   },
   text14pxSec: {
     fontSize: 14,
@@ -94,6 +95,28 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: TEXT_LIGHT,
     lineHeight: 19,
+  },
+  bigText: {
+    fontSize: 22,
+    lineHeight: 30,
+    fontWeight: '700',
+    color: TEXT_DARK,
+    marginTop: 8,
+  },
+  smallText: {
+    fontSize: 16,
+    lineHeight: 22,
+    fontWeight: '400',
+    color: TEXT_DARK,
+  },
+  wrapDetails: {
+    paddingLeft: 10,
+  },
+  button: {
+    paddingLeft: 10,
+  },
+  wrapList: {
+    alignItems: 'center',
   },
 });
 

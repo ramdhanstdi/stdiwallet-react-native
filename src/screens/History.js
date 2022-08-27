@@ -3,7 +3,12 @@ import React from 'react';
 import Card from '../component/Card';
 import styles from '../styles/global';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {SECONDARY_COLOR, SUCCESS_COLOR, TEXT_LIGHT, WARNING_COLOR} from '../styles/const';
+import {
+  SECONDARY_COLOR,
+  SUCCESS_COLOR,
+  TEXT_LIGHT,
+  WARNING_COLOR,
+} from '../styles/const';
 
 const data = [
   {name: 'Alex', type: 'Send', image: null, amount: 1000},

@@ -11,38 +11,58 @@ import Card from '../component/Card';
 import {ErrorMessage, Formik} from 'formik';
 import Input from '../component/Input';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {TEXT_DARK} from '../styles/const';
+import {SECONDARY_COLOR, TEXT_DARK} from '../styles/const';
+import styles from '../styles/global';
+import ButtonAuth from '../component/ButtonAuth';
 
 const data = [{name: 'Alex', type: '08435734', image: null}];
 
 const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
   return (
-    <View style={styleLocal.wrapSearch}>
-      <Icon name="pencil" size={24} onPress={handleSubmit} />
+    <>
       <TextInput
-        style={styleLocal.input}
-        onBlur={handleBlur('searching')}
-        onChangeText={handleChange('searching')}
-        name="searching"
-        placeholder="Write Notes"
-        type="text"
+        style={styleLocal.amount}
+        placeholder="0.00"
+        keyboardType="number-pad"
+        onBlur={handleBlur('amount')}
+        onChangeText={handleChange('amount')}
+        name="amount"
       />
-    </View>
+      <View style={styleLocal.wrapFinish}>
+        <View style={styleLocal.wrapSearch}>
+          <Icon name="pencil" size={24} />
+          <TextInput
+            style={styleLocal.input}
+            onBlur={handleBlur('notes')}
+            onChangeText={handleChange('notes')}
+            name="notes"
+            placeholder="Write Notes"
+          />
+        </View>
+        <View style={styleLocal.ButtonAuth}>
+          <ButtonAuth title="submit" action={handleSubmit} text="Confirm" />
+        </View>
+      </View>
+    </>
   );
 };
 
-const Transfer = () => {
+const Transfer = ({navigation}) => {
   const onSubmit = val => {
     console.log(val);
+    navigation.navigate('Confirmation');
   };
   return (
     <>
-      <View style={styleLocal.wrapHead}>
+      <View style={styles.wrapList}>
         <FlatList data={data} renderItem={Card} />
       </View>
-      <Formik onSubmit={onSubmit} initialValues={{searching: ''}}>
-        {props => <FormInput {...props} />}
-      </Formik>
+      <View style={styleLocal.wrapInput}>
+        <Text style={styles.text14px}>Rp. 12000 Available</Text>
+        <Formik onSubmit={onSubmit} initialValues={{amount: '', notes: ''}}>
+          {props => <FormInput {...props} />}
+        </Formik>
+      </View>
     </>
   );
 };
@@ -50,9 +70,6 @@ const Transfer = () => {
 export default Transfer;
 
 const styleLocal = StyleSheet.create({
-  wrapHead: {
-    marginVertical: 20,
-  },
   wrapSearch: {
     height: 54,
     width: Dimensions.get('screen').width - 20,
@@ -69,6 +86,19 @@ const styleLocal = StyleSheet.create({
     borderBottomWidth: 1,
     marginLeft: 10,
     flex: 1,
-    zIndex: 222,
+  },
+  amount: {
+    fontSize: 40,
+    textAlign: 'center',
+    color: SECONDARY_COLOR,
+  },
+  wrapInput: {
+    alignItems: 'center',
+    marginTop: 30,
+  },
+  wrapFinish: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: Dimensions.get('screen').height / 2,
   },
 });

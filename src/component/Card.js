@@ -42,14 +42,15 @@ export default Card;
 const styleLocal = StyleSheet.create({
   wrapper: {
     height: 96,
-    width: Dimensions.get('screen').width,
-    marginVertical: 10,
+    width: Dimensions.get('screen').width - 20,
+    margin: 10,
     backgroundColor: CARD_COLOR,
-    borderRadius: 10,
+    borderRadius: 15,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
     justifyContent: 'space-between',
+    overflow: 'hidden',
   },
   textName: {
     fontSize: 16,

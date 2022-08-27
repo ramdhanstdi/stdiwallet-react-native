@@ -43,12 +43,12 @@ const Home = ({navigation}) => {
           <ButtonTransaction
             icon="plus"
             text="Top Up"
-            action={() => navigation.navigate('TopUp')}
+            action={() => navigation.navigate('Top Up')}
           />
         </View>
         <View style={styles.wrapTextHome}>
-          <Text style={styles.homeText18px}>Transaction History</Text>
-          <TouchableOpacity>
+          <Text style={styles.homeText18px}> Transaction History</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('History')}>
             <Text style={styles.text14pxSec}>See all</Text>
           </TouchableOpacity>
         </View>
