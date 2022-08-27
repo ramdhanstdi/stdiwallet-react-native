@@ -9,13 +9,22 @@ import ForgotPassword from './src/screens/ForgotPassword';
 import ResetPassword from './src/screens/ResetPassword';
 import Home from './src/screens/Home';
 import CreatePinSuccess from './src/screens/CreatePinSuccess';
+import History from './src/screens/History';
+import HomeStack from './src/screens/HomeStack';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  return ( <Home/>
-    // <NavigationContainer>
-    //   <Stack.Navigator>
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="HomeStack"
+          component={HomeStack}
+        />
+      </Stack.Navigator>
+      {/* //   <Stack.Navigator>
     //     <Stack.Screen
     //       options={{headerShown: false}}
     //       name="Login"
@@ -46,8 +55,8 @@ const App = () => {
     //       name="Home"
     //       component={Home}
     //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
+    //   </Stack.Navigator> */}
+    </NavigationContainer>
   );
 };
 

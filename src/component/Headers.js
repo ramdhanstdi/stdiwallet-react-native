@@ -12,8 +12,10 @@ const Headers = ({textTitle, subText, image, icon}) => {
         <View style={styleLocal.contentHead}>
           <View style={styleLocal.contentHead}>
             {image ? (
+              <Image source={{uri: image, width: 50, height: 50}} />
+            ) : (
               <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
-            ) : null}
+            )}
             <View style={styleLocal.textHead}>
               <Text style={styleLocal.textTitle}>{subText}</Text>
               <Text style={styleLocal.subText}>{textTitle}</Text>

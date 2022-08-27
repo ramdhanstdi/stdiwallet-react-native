@@ -1,1 +1,2 @@
 export const DEFAULT_IMG = 'https://res.cloudinary.com/dwuu0fhoy/image/upload/v1661504740/stdiwallet/default_cbs0sm.png';
+export const GRAPHIC = 'https://res.cloudinary.com/dwuu0fhoy/image/upload/v1661574056/stdiwallet/graphic_upgsa2.png';

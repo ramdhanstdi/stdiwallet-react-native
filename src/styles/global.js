@@ -9,9 +9,7 @@ import {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: PRIMARY_COLOR,
   },
   wrapperBody: {
     width: Dimensions.get('screen').width,
@@ -60,6 +58,42 @@ const styles = StyleSheet.create({
   warningForm: {
     paddingLeft: 20,
     color: WARNING_COLOR,
+  },
+  wrapTextHome: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 13,
+  },
+  homeText18px: {
+    fontSize: 18,
+    fontWeight: '700',
+    lineHeight: 25,
+    color: TEXT_DARK,
+  },
+  text14pxSec: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 19,
+    color: SECONDARY_COLOR,
+  },
+  text14px: {
+    fontSize: 14,
+    fontWeight: '400',
+    lineHeight: 19,
+    color: SECONDARY_COLOR,
+  },
+  textSaldo: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: TEXT_LIGHT,
+    lineHeight: 33,
+    paddingVertical: 10,
+  },
+  textBalance: {
+    fontSize: 14,
+    fontWeight: '400',
+    color: TEXT_LIGHT,
+    lineHeight: 19,
   },
 });
 

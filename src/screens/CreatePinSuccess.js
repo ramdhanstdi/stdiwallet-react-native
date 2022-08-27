@@ -5,6 +5,7 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { SUCCESS_COLOR } from '../styles/const';
 
 const CreatePinSuccess = ({navigation}) => {
   const onSubmit = val => {
@@ -18,7 +19,7 @@ const CreatePinSuccess = ({navigation}) => {
         <Auth />
         <View style={styles.wrapperBody}>
           <View style={styleLocal.logo}>
-            <Icon name="check-circle" size={70} color="#1EC15F" />
+            <Icon name="check-circle" size={70} color={SUCCESS_COLOR} />
           </View>
           <View>
             <Text style={styles.authTitle}>Login</Text>
