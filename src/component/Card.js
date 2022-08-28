@@ -1,4 +1,11 @@
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import {
   CARD_COLOR,
@@ -9,23 +16,28 @@ import {
 } from '../styles/const';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import styles from '../styles/global';
+import {useSelector} from 'react-redux';
 
 const Card = ({item}) => {
+  const id = useSelector(state => state.auth.id);
   return (
     <View style={styleLocal.wrapper}>
       <View style={styleLocal.wrapLeft}>
-        {item.image ? (
-          <Image source={{uri: item.image, width: 50, height: 50}} />
+        {item.profile_photo ? (
+          <Image source={{uri: item.profile_photo, width: 50, height: 50}} />
         ) : (
           <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
         )}
         <View style={styleLocal.wrapText}>
-          <Text style={styleLocal.textName}>{item.name}</Text>
-          <Text style={styles.text14px}>{item.type}</Text>
+          <Text
+            style={
+              styleLocal.textName
+            }>{`${item.first_name} ${item.last_name}`}</Text>
+          <Text style={styles.text14px}>{item.transfertype}</Text>
         </View>
       </View>
       <View>
-        {item.type === 'Send'
+        {item.transfertype === 'Transfer' && item.sender_id === id
           ? item.amount && (
               <Text style={styleLocal.textMoneyR}>{`-${item.amount}`}</Text>
             )

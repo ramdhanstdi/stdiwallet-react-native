@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Card from '../component/Card';
 import styles from '../styles/global';
@@ -9,6 +9,8 @@ import {
   TEXT_LIGHT,
   WARNING_COLOR,
 } from '../styles/const';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserLogin} from '../redux/asyncAction/profile';
 
 const data = [
   {name: 'Alex', type: 'Send', image: null, amount: 1000},
@@ -18,13 +20,26 @@ const data = [
   {name: 'Bani', type: 'Receive', image: null, amount: 1000},
 ];
 
-const History = () => {
+const History = ({navigation}) => {
+  const profile = useSelector(state => state.profile.data);
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getUserLogin(token));
+  }, []);
   return (
     <>
       <View style={styleLocal.wrap}>
         <Text style={styles.text14px}>This Month</Text>
       </View>
-      <FlatList nestedScrollEnabled data={data} renderItem={Card} />
+      <FlatList
+        data={data}
+        renderItem={({item}) => (
+          <TouchableOpacity>
+            <Card item={item} />
+          </TouchableOpacity>
+        )}
+      />
       <View style={styleLocal.wrapButton}>
         <View style={styleLocal.buttonLeft}>
           <View style={styleLocal.button}>

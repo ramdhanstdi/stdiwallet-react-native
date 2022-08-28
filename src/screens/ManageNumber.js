@@ -2,8 +2,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CardDetails from '../component/CardDetails';
 import styles from '../styles/global';
+import {useSelector} from 'react-redux';
 
 const ManageNumber = ({navigation}) => {
+  const profile = useSelector(state => state.profile.data);
   return (
     <>
       <View style={styles.wrapDetails}>
@@ -15,7 +17,7 @@ const ManageNumber = ({navigation}) => {
         </View>
         <CardDetails
           smalText="Primary"
-          bigText="+6281393877946"
+          bigText={profile.num_phone}
           icon={true}
           navigation={navigation}
         />

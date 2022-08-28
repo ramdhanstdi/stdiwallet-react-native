@@ -1,62 +1,17 @@
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Register from './src/screens/Register';
-import Login from './src/screens/Login';
-import CreatePin from './src/screens/CreatePin';
-import ForgotPassword from './src/screens/ForgotPassword';
-import ResetPassword from './src/screens/ResetPassword';
-import Home from './src/screens/Home';
-import CreatePinSuccess from './src/screens/CreatePinSuccess';
-import History from './src/screens/History';
-import HomeStack from './src/screens/HomeStack';
-
-const Stack = createNativeStackNavigator();
+import {Provider} from 'react-redux';
+import {store, persistor} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import Main from './src/screens/Main';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="HomeStack"
-          component={HomeStack}
-        />
-      </Stack.Navigator>
-      {/* //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="Login"
-    //       component={Login}
-    //     />
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="Register"
-    //       component={Register}
-    //     />
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="CreatePin"
-    //       component={CreatePin}
-    //     />
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="ForgotPassword"
-    //       component={ForgotPassword}
-    //     />
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="ResetPassword"
-    //       component={ResetPassword}
-    //     />
-    //     <Stack.Screen
-    //       options={{headerShown: false}}
-    //       name="Home"
-    //       component={Home}
-    //     />
-    //   </Stack.Navigator> */}
-    </NavigationContainer>
+    <Provider store={store}>
+      <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+        <Main />
+      </PersistGate>
+    </Provider>
   );
 };
 

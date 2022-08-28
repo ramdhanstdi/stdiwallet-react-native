@@ -14,6 +14,8 @@ import {ErrorMessage, Formik} from 'formik';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Card from '../component/Card';
 import styles from '../styles/global';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllProfile} from '../redux/asyncAction/profile';
 
 const data = [
   {name: 'Alex', type: '08435734', image: null},
@@ -40,6 +42,9 @@ const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
 };
 
 const FinReceiver = ({navigation}) => {
+  const allprofile = useSelector(state => state.profile.allprofile);
+  console.log('halo' + allprofile);
+  const dispatch = useDispatch();
   const onSubmit = val => {
     console.log(val);
   };
@@ -51,6 +56,9 @@ const FinReceiver = ({navigation}) => {
     console.log(result);
     navigation.navigate('Transfer');
   };
+  React.useEffect(() => {
+    dispatch(getAllProfile());
+  }, []);
   return (
     <>
       <Formik onSubmit={onSubmit} initialValues={{searching: ''}}>
@@ -59,7 +67,7 @@ const FinReceiver = ({navigation}) => {
       <Text style={styles.homeText18px}> All Contact</Text>
       <FlatList
         nestedScrollEnabled
-        data={data}
+        data={allprofile}
         renderItem={({item}) => (
           <TouchableOpacity onBlur={getData(item)} onPress={PassingData}>
             <Card item={item} />

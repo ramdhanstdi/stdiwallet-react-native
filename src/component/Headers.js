@@ -4,7 +4,7 @@ import {DEFAULT_IMG} from '../assets/defaultimg';
 import {SECONDARY_COLOR, TEXT_DARK} from '../styles/const';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Headers = ({textTitle, subText, image, icon}) => {
+const Headers = ({textTitle, subText, image, icon, action}) => {
   const show = false;
   return (
     <>
@@ -21,7 +21,9 @@ const Headers = ({textTitle, subText, image, icon}) => {
               <Text style={styleLocal.subText}>{textTitle}</Text>
             </View>
           </View>
-          {icon ? <Icon name="bell-o" color={TEXT_DARK} size={30} /> : null}
+          {icon ? (
+            <Icon name="bell-o" color={TEXT_DARK} size={30} onPress={action} />
+          ) : null}
         </View>
       </View>
     </>

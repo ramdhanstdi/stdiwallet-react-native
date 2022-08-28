@@ -5,7 +5,9 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import {ErrorMessage, Formik} from 'formik';
+import {useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
+import { login } from '../redux/asyncAction/auth';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid Email Format').required('Required'),
@@ -73,11 +75,19 @@ const FormLogin = ({
 };
 
 const Login = ({navigation}) => {
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
   const onSubmit = val => {
-    console.log(val);
-    navigation.navigate('Home');
-    //disini untuk fungsi register lempar ke Crate pin
+    const email = val.email;
+    const password = val.password;
+    const request = {email, password};
+    dispatch(login(request));
   };
+  React.useEffect(() => {
+    if (token) {
+      navigation.navigate('HomeTab');
+    }
+  }, [token]);
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>

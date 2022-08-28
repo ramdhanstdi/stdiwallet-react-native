@@ -13,25 +13,38 @@ import {SECONDARY_COLOR, TEXT_LIGHT} from '../styles/const';
 import ButtonTransaction from '../component/ButtonTransaction';
 import styles from '../styles/global';
 import Card from '../component/Card';
-
-const data = [
-  {name: 'Alex', type: 'Send', image: null, amount: 1000},
-  {name: 'Ali', type: 'Receive', image: null, amount: 1000},
-  {name: 'Buro', type: 'Send', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-];
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserLogin} from '../redux/asyncAction/profile';
+import {getHistory} from '../redux/asyncAction/transaction';
 
 const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
+  const profile = useSelector(state => state.profile.data);
+  const history = useSelector(state => state.transaction.data);
+  console.log(history);
+  if (!token) {
+    navigation.navigate('Login');
+  }
+  React.useEffect(() => {
+    dispatch(getUserLogin(token));
+    dispatch(getHistory(token));
+  }, []);
   return (
     <>
       <View contentContainerStyle={styles.wrapper}>
-        <Headers textTitle="Gojo Dan" image="" icon={true} subText="Hello" />
+        <Headers
+          textTitle={`${profile.first_name} ${profile.last_name}`}
+          image={profile.profile_photo}
+          icon={true}
+          action={() => navigation.navigate('Notification')}
+          subText="Hello"
+        />
         <View style={styleLocal.wrapBalance}>
           <View style={styleLocal.wrapText}>
             <Text style={styles.textBalance}>Balance</Text>
-            <Text style={styles.textSaldo}>Rp 100.000</Text>
-            <Text style={styleLocal.textNum}>08347235342</Text>
+            <Text style={styles.textSaldo}>{profile.balance}</Text>
+            <Text style={styleLocal.textNum}>{profile.num_phone}</Text>
           </View>
         </View>
         <View style={styleLocal.wrapButton}>
@@ -47,14 +60,14 @@ const Home = ({navigation}) => {
           />
         </View>
         <View style={styles.wrapTextHome}>
-          <Text style={styles.homeText18px}> Transaction History</Text>
+          <Text style={styles.homeText18px}>Transaction History</Text>
           <TouchableOpacity onPress={() => navigation.navigate('History')}>
             <Text style={styles.text14pxSec}>See all</Text>
           </TouchableOpacity>
         </View>
       </View>
       <FlatList
-        data={data}
+        data=""
         renderItem={({item}) => (
           <TouchableOpacity>
             <Card item={item} />

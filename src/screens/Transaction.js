@@ -14,6 +14,8 @@ import {SECONDARY_COLOR, SUCCESS_COLOR, WARNING_COLOR} from '../styles/const';
 import styles from '../styles/global';
 import {GRAPHIC} from '../assets/defaultimg';
 import Card from '../component/Card';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserLogin} from '../redux/asyncAction/profile';
 
 const data = [
   {name: 'Alex', type: 'Send', image: null, amount: 1000},
@@ -23,7 +25,13 @@ const data = [
   {name: 'Bani', type: 'Receive', image: null, amount: 1000},
 ];
 
-const Transaction = () => {
+const Transaction = ({navigation}) => {
+  const profile = useSelector(state => state.profile.data);
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getUserLogin(token));
+  }, []);
   return (
     <>
       <ScrollView style={styleLocal.scrollView}>
@@ -66,9 +74,12 @@ const Transaction = () => {
       </View>
       <FlatList
         style={styleLocal.wrapCard}
-        nestedScrollEnabled
         data={data}
-        renderItem={Card}
+        renderItem={({item}) => (
+          <TouchableOpacity>
+            <Card item={item} />
+          </TouchableOpacity>
+        )}
       />
     </>
   );

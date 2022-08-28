@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   wrapTextHome: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 13,
+    marginRight: 13,
+    marginLeft: 5,
   },
   homeText18px: {
     fontSize: 18,

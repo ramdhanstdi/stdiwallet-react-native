@@ -2,8 +2,16 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import styles from '../styles/global';
 import CardDetails from '../component/CardDetails';
+import {useDispatch, useSelector} from 'react-redux';
+import {getUserLogin} from '../redux/asyncAction/profile';
 
 const PersonalInfo = ({navigation}) => {
+  const profile = useSelector(state => state.profile.data);
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getUserLogin(token));
+  }, []);
   return (
     <ScrollView>
       <View style={styles.wrapDetails}>
@@ -13,12 +21,12 @@ const PersonalInfo = ({navigation}) => {
             want to make changes on your information, contact our support.
           </Text>
         </View>
-        <CardDetails smalText="First Name" bigText="Gojo" />
-        <CardDetails smalText="Last Name" bigText="Dan" />
-        <CardDetails smalText="Verified E-mail" bigText="gojodan@gmail.com" />
+        <CardDetails smalText="First Name" bigText={profile.first_name} />
+        <CardDetails smalText="Last Name" bigText={profile.last_name} />
+        <CardDetails smalText="Verified E-mail" bigText={profile.email} />
         <CardDetails
           smalText="Phone Number"
-          bigText="08834254411"
+          bigText={profile.num_phone}
           navigation={navigation}
         />
       </View>
