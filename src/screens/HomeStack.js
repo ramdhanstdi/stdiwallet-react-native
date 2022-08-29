@@ -16,6 +16,7 @@ import ChangePin from './ChangePin';
 import ConfimPin from './ConfimPin';
 import ChangePass from './ChangePass';
 import Notification from './Notification';
+import EditProfile from './EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ const HomeStack = () => {
       <Stack.Screen name="New Pin" component={ConfimPin} />
       <Stack.Screen name="Change Password" component={ChangePass} />
       <Stack.Screen name="Notification" component={Notification} />
+      <Stack.Screen name="Edit Profile" component={EditProfile} />
       <Stack.Screen
         options={{headerShown: false}}
         name="StatusSucces"

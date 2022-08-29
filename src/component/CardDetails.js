@@ -20,7 +20,11 @@ const CardDetails = ({smalText, bigText, navigation, icon}) => {
         </View>
         {smalText === 'Phone Number' ? (
           <TouchableOpacity
-            onPress={() => navigation.navigate('Manage Number')}>
+            onPress={() => {
+              bigText
+                ? navigation.navigate('Manage Number')
+                : navigation.navigate('Add Phone Number');
+            }}>
             <Text>Manage</Text>
           </TouchableOpacity>
         ) : null}

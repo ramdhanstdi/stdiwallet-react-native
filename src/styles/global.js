@@ -2,6 +2,7 @@ import {Dimensions, StyleSheet} from 'react-native';
 import {
   PRIMARY_COLOR,
   SECONDARY_COLOR,
+  SUCCESS_COLOR,
   TEXT_DARK,
   TEXT_LIGHT,
   WARNING_COLOR,
@@ -118,6 +119,20 @@ const styles = StyleSheet.create({
   },
   wrapList: {
     alignItems: 'center',
+  },
+  warning: {
+    height: 40,
+    fontSize: 18,
+    backgroundColor: WARNING_COLOR,
+    color: TEXT_DARK,
+    textAlign: 'center',
+  },
+  successmsg: {
+    fontSize: 18,
+    textAlign: 'center',
+    backgroundColor: SUCCESS_COLOR,
+    height: 30,
+    color: TEXT_DARK,
   },
 });
 

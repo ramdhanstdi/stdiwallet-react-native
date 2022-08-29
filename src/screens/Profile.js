@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {CARD_COLOR, TEXT_DARK} from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../redux/asyncAction/profile';
+import {logOut} from '../redux/reducers/auth';
 
 const CardProfile = ({text, icon, action}) => {
   return (
@@ -31,44 +32,48 @@ const Profile = ({navigation}) => {
     dispatch(getUserLogin(token));
   }, []);
   return (
-    <ScrollView>
-      <View style={styleLocal.wrapHead}>
-        <Image
-          source={{
-            uri: profile.profile_photo ? profile.profile_photo : DEFAULT_IMG,
-            width: 70,
-            height: 70,
-          }}
+    <>
+      <ScrollView>
+        <View style={styleLocal.wrapHead}>
+          <Image
+            source={{
+              uri: profile.profile_photo ? profile.profile_photo : DEFAULT_IMG,
+              width: 70,
+              height: 70,
+            }}
+          />
+          <TouchableOpacity
+            style={styleLocal.edit}
+            onPress={() => navigation.navigate('Edit Profile')}>
+            <Icon name="pencil" size={15} color={TEXT_DARK} />
+            <Text style={styleLocal.textEdit}>Edit</Text>
+          </TouchableOpacity>
+          <Text
+            style={
+              styleLocal.name
+            }>{`${profile.first_name} ${profile.last_name}`}</Text>
+          <Text style={styleLocal.number}>{profile.num_phone}</Text>
+        </View>
+        <CardProfile
+          action={() => navigation.navigate('Personal Information')}
+          text="Personal Information"
+          icon="arrow-right"
         />
-        <TouchableOpacity style={styleLocal.edit}>
-          <Icon name="pencil" size={15} color={TEXT_DARK} />
-          <Text style={styleLocal.textEdit}>Edit</Text>
-        </TouchableOpacity>
-        <Text
-          style={
-            styleLocal.name
-          }>{`${profile.first_name} ${profile.last_name}`}</Text>
-        <Text style={styleLocal.number}>{profile.num_phone}</Text>
-      </View>
-      <CardProfile
-        action={() => navigation.navigate('Personal Information')}
-        text="Personal Information"
-        icon="arrow-right"
-      />
-      <CardProfile
-        text="Change Password"
-        icon="arrow-right"
-        action={() => navigation.navigate('Change Password')}
-      />
-      <CardProfile
-        text="Change PIN"
-        icon="arrow-right"
-        action={() => navigation.navigate('Change Pin')}
-      />
-      <CardProfile text="Notification" />
-      <CardProfile text="Logout" />
-      <Text>{'\n'}</Text>
-    </ScrollView>
+        <CardProfile
+          text="Change Password"
+          icon="arrow-right"
+          action={() => navigation.navigate('Change Password')}
+        />
+        <CardProfile
+          text="Change PIN"
+          icon="arrow-right"
+          action={() => navigation.navigate('Change Pin')}
+        />
+        <CardProfile text="Notification" />
+        <CardProfile text="Logout" action={() => dispatch(logOut())} />
+        <Text>{'\n'}</Text>
+      </ScrollView>
+    </>
   );
 };
 

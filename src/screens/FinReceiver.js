@@ -43,7 +43,8 @@ const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
 
 const FinReceiver = ({navigation}) => {
   const allprofile = useSelector(state => state.profile.allprofile);
-  console.log('halo' + allprofile);
+  const pagination = useSelector(state => state.profile.page);
+  console.log(pagination);
   const dispatch = useDispatch();
   const onSubmit = val => {
     console.log(val);
@@ -66,7 +67,6 @@ const FinReceiver = ({navigation}) => {
       </Formik>
       <Text style={styles.homeText18px}> All Contact</Text>
       <FlatList
-        nestedScrollEnabled
         data={allprofile}
         renderItem={({item}) => (
           <TouchableOpacity onBlur={getData(item)} onPress={PassingData}>

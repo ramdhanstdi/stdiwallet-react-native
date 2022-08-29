@@ -13,7 +13,23 @@ export const login = createAsyncThunk('/auth/login', async request => {
     results.massage = data.massage;
     return results;
   } catch (e) {
-    console.log(e);
+    results.error = e.response.data.massage;
+    return results;
+  }
+});
+
+export const register = createAsyncThunk('/auth/register', async request => {
+  const results = {};
+  try {
+    const send = qs.stringify(request);
+    console.log(send);
+    const {data} = await http().post('/auth/register', send);
+    console.log(data);
+    results.data = data.result;
+    results.massage = data.massage;
+    return results;
+  } catch (e) {
+
     return e;
   }
 });

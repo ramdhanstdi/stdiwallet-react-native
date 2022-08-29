@@ -5,6 +5,9 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import * as Yup from 'yup';
 import ButtonAuth from '../component/ButtonAuth';
+import {SUCCESS_COLOR, TEXT_DARK, WARNING_COLOR} from '../styles/const';
+import {useDispatch, useSelector} from 'react-redux';
+import {addNumber, getUserLogin} from '../redux/asyncAction/profile';
 
 const phoneSchema = Yup.object().shape({
   phone: Yup.string()
@@ -39,22 +42,28 @@ const FormPhone = ({handleBlur, handleChange, handleSubmit, errors}) => {
 };
 
 export default function AddPhone({navigation}) {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
   const regExp = /[a-zA-Z]/g;
+  const successmsg = useSelector(state => state.profile.successmsg);
+  const [warning, setWarning] = React.useState('');
   const submit = val => {
     if (regExp.test(val.phone)) {
-      // window.alert('Input Only Mobile Phone Format');
+      setWarning('Input Only Mobile Phone Format');
     } else if (
       (val.phone[0] === '0' && val.phone[1] === '8') ||
       val.phone.includes('+62')
     ) {
-      // dispatch(addPhone({token, num_phone: val.phone}));
-      navigation.navigate('Personal Information');
+      dispatch(addNumber({token, num_phone: val.phone}));
+      setTimeout(() => navigation.navigate('Personal Information'), 3 * 1000);
     } else {
-      // window.alert('Invalid Format Number');/
+      setWarning('Invalid Format Number');
     }
   };
   return (
     <>
+      {warning && <Text style={styles.warning}>{warning}</Text>}
+      {successmsg && <Text style={styles.successmsg}>{successmsg}</Text>}
       <View style={styles.wrapDetails}>
         <View style={styleLocal.text}>
           <Text style={styles.smallText}>

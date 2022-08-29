@@ -6,6 +6,8 @@ import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import {ErrorMessage, Formik} from 'formik';
 import * as Yup from 'yup';
+import {useDispatch, useSelector} from 'react-redux';
+import {register} from '../redux/asyncAction/auth';
 
 const registerSchema = Yup.object().shape({
   username: Yup.string()
@@ -85,11 +87,21 @@ const FormRegister = ({
 };
 
 const Register = ({navigation}) => {
+  const successmsg = useSelector(state => state.auth.successmsg);
+  const dispatch = useDispatch();
   const onSubmit = val => {
-    console.log(val);
-    navigation.navigate('CreatePin');
-    //disini untuk fungsi register lempar ke Crate pin
+    const request = {
+      username: val.username,
+      email: val.email,
+      password: val.password,
+    };
+    dispatch(register(request));
   };
+  React.useEffect(() => {
+    if (successmsg) {
+      navigation.navigate('Login');
+    }
+  }, [successmsg]);
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>

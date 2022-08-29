@@ -5,6 +5,9 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import * as Yup from 'yup';
 import ButtonAuth from '../component/ButtonAuth';
+import {useDispatch, useSelector} from 'react-redux';
+import {resetmsg} from '../redux/reducers/profile';
+import {changePass} from '../redux/asyncAction/profile';
 
 const changePassSchema = Yup.object().shape({
   oldpassword: Yup.string().required('Required'),
@@ -64,12 +67,31 @@ const FormChangePass = ({handleBlur, handleChange, handleSubmit, errors}) => {
 };
 
 const ChangePass = ({navigation}) => {
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
+  const successmsg = useSelector(state => state.profile.successmsg);
+  const [warning, setWarning] = React.useState('');
   const submit = val => {
-    console.log(val);
-    navigation.navigate('Profile');
+    const request = {
+      oldPass: val.oldpassword,
+      newPass: val.newpassword,
+      confirmPass: val.confirmpassword,
+    };
+    if (val.newpassword !== val.confirmpassword) {
+      setWarning('New Password Not Match');
+    } else {
+      dispatch(changePass({token, request}));
+    }
   };
+  React.useEffect(() => {
+    if (successmsg) {
+      setTimeout(() => dispatch(resetmsg()), 3 * 1000);
+    }
+  }, [successmsg]);
   return (
     <>
+      {warning && <Text style={styles.warning}>{warning}</Text>}
+      {successmsg && <Text style={styles.successmsg}>{successmsg}</Text>}
       <View style={styles.wrapDetails}>
         <View style={styleLocal.text}>
           <Text style={styles.smallText}>

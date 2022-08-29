@@ -7,7 +7,8 @@ import ButtonAuth from '../component/ButtonAuth';
 import {ErrorMessage, Formik} from 'formik';
 import {useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
-import { login } from '../redux/asyncAction/auth';
+import {login} from '../redux/asyncAction/auth';
+import {SUCCESS_COLOR, TEXT_DARK} from '../styles/const';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid Email Format').required('Required'),
@@ -76,6 +77,9 @@ const FormLogin = ({
 
 const Login = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
+  const errormsg = useSelector(state => state.auth.errormsg);
+  console.log(errormsg);
+  const successmsg = useSelector(state => state.auth.successmsg);
   const dispatch = useDispatch();
   const onSubmit = val => {
     const email = val.email;
@@ -87,9 +91,11 @@ const Login = ({navigation}) => {
     if (token) {
       navigation.navigate('HomeTab');
     }
-  }, [token]);
+  }, [errormsg]);
   return (
     <>
+      {successmsg && <Text style={styleLocal.successmsg}>{successmsg}</Text>}
+      {errormsg && <Text style={styles.warning}>{errormsg}</Text>}
       <ScrollView contentContainerStyle={styles.wrapper}>
         <Auth />
         <View style={styles.wrapperBody}>
@@ -118,6 +124,13 @@ const styleLocal = StyleSheet.create({
     marginRight: 20,
     textAlign: 'right',
     marginTop: 20,
+  },
+  successmsg: {
+    fontSize: 18,
+    textAlign: 'center',
+    backgroundColor: SUCCESS_COLOR,
+    height: 30,
+    color: TEXT_DARK,
   },
 });
 

@@ -15,11 +15,63 @@ export const getUserLogin = createAsyncThunk('/profile/login', async token => {
   }
 });
 
+export const editProfile = createAsyncThunk(
+  '/profile/edit',
+  async ({token, request}) => {
+    const results = {};
+    try {
+      const send = qs.stringify(request);
+      const {data} = await http(token).patch('/profile', send);
+      results.data = data.result;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
+
+export const addNumber = createAsyncThunk(
+  '/profile/AddNumber',
+  async ({token, num_phone}) => {
+    const results = {};
+    try {
+      const send = qs.stringify({num_phone});
+      const {data} = await http(token).patch('/number', send);
+      results.data = data.result;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
+
+export const changePass = createAsyncThunk(
+  '/profile/changePass',
+  async ({token, request}) => {
+    const results = {};
+    try {
+      const send = qs.stringify(request);
+      const {data} = await http(token).patch('/changePassword', send);
+      results.data = data.result;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
+
 export const getAllProfile = createAsyncThunk('/profile/all', async () => {
   const results = {};
   try {
     const {data} = await http().get('/admin/profile');
     results.data = data.result;
+    results.page = data.pageInfo;
     results.massage = data.massage;
     return results;
   } catch (e) {

@@ -11,7 +11,7 @@ const PersonalInfo = ({navigation}) => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(getUserLogin(token));
-  }, []);
+  }, [profile]);
   return (
     <ScrollView>
       <View style={styles.wrapDetails}>

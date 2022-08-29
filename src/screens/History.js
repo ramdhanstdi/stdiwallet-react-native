@@ -21,12 +21,6 @@ const data = [
 ];
 
 const History = ({navigation}) => {
-  const profile = useSelector(state => state.profile.data);
-  const token = useSelector(state => state.auth.token);
-  const dispatch = useDispatch();
-  React.useEffect(() => {
-    dispatch(getUserLogin(token));
-  }, []);
   return (
     <>
       <View style={styleLocal.wrap}>
