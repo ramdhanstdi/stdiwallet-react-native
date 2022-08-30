@@ -1,8 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import http from '../../helpers/http';
+import PushNotification from 'react-native-push-notification';
 import qs from 'qs';
 
-export const getHistory = createAsyncThunk('/auth/login', async token => {
+export const getHistory = createAsyncThunk('/trans/history', async token => {
   const results = {};
   try {
     const {data} = await http(token).get('/historyTransaction');
@@ -15,3 +16,44 @@ export const getHistory = createAsyncThunk('/auth/login', async token => {
     return e;
   }
 });
+
+export const transferTo = createAsyncThunk(
+  '/trans/transfer',
+  async ({token, request}) => {
+    const results = {};
+    try {
+      const send = qs.stringify(request);
+      const {data} = await http(token).post('/transfer', send);
+      console.log(data);
+      results.data = data.result;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
+
+export const topUp = createAsyncThunk(
+  '/trans/topup',
+  async ({token, request}) => {
+    const results = {};
+    try {
+      const send = qs.stringify(request);
+      const {data} = await http(token).patch('/topUp', send);
+      console.log(data);
+      results.data = data.result;
+      results.massage = data.massage;
+      PushNotification.localNotification({
+        channelId: 'general',
+        title: 'Top Up Success',
+        message: 'You Has Been Scammed',
+      });
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);

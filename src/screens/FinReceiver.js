@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import {PRIMARY_COLOR, TEXT_DARK} from '../styles/const';
-import Input from '../component/Input';
-import {ErrorMessage, Formik} from 'formik';
+import {Formik} from 'formik';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Card from '../component/Card';
 import styles from '../styles/global';

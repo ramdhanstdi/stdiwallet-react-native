@@ -32,6 +32,7 @@ const styleLocal = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 6,
   },
   text: {
     fontSize: 18,

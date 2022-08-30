@@ -14,6 +14,7 @@ import {getUserLogin} from '../redux/asyncAction/profile';
 import {useDispatch, useSelector} from 'react-redux';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import {CARD_COLOR, TEXT_DARK} from '../styles/const';
+import {getdate} from '../redux/reducers/transaction';
 
 const Confirmation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -23,10 +24,12 @@ const Confirmation = ({navigation}) => {
   const image = useSelector(state => state.transaction.image);
   const phone = useSelector(state => state.transaction.phone);
   const amount = useSelector(state => state.transaction.amount);
+  const date = new Date().toISOString();
   console.log(amount);
   const notes = useSelector(state => state.transaction.notes);
   const onSubmit = val => {
-    navigation.navigate('Confirmation');
+    dispatch(getdate(date));
+    navigation.navigate('Enter Your Pin');
   };
   React.useEffect(() => {
     dispatch(getUserLogin(token));
@@ -53,7 +56,7 @@ const Confirmation = ({navigation}) => {
           smalText="Balance Left"
           bigText={profile.balance - amount}
         />
-        <CardDetails smalText="Date & Time" bigText="May 11, 2020 - 12.20" />
+        <CardDetails smalText="Date & Time" bigText={date} />
         <CardDetails smalText="Notes" bigText={notes} />
         <View style={styles.button}>
           <ButtonAuth text="Confirm" action={onSubmit} />

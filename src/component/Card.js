@@ -63,6 +63,7 @@ const styleLocal = StyleSheet.create({
     paddingHorizontal: 15,
     justifyContent: 'space-between',
     overflow: 'hidden',
+    elevation: 6,
   },
   textName: {
     fontSize: 16,

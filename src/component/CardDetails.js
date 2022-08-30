@@ -52,5 +52,6 @@ const styleLocal = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     flexDirection: 'row',
+    elevation: 6,
   },
 });

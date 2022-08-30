@@ -30,6 +30,7 @@ const styleLocal = StyleSheet.create({
     backgroundColor: SECONDARY_COLOR,
     marginBottom: 15,
     borderRadius: 15,
+    elevation: 6,
   },
   text: {
     fontSize: 18,

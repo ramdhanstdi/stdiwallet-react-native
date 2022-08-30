@@ -85,6 +85,7 @@ const styleLocal = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 20,
     marginHorizontal: 10,
+    elevation: 6,
   },
   wrapText: {
     marginHorizontal: 20,

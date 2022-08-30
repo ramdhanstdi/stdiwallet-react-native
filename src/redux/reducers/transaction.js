@@ -1,6 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getHistory} from '../asyncAction/transaction';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getHistory, transferTo, topUp} from '../asyncAction/transaction';
 
 const initialState = {
   data: '',
@@ -12,6 +11,7 @@ const initialState = {
   receiver: '',
   amount: '',
   notes: '',
+  date: '',
 };
 
 export const transaction = createSlice({
@@ -36,6 +36,13 @@ export const transaction = createSlice({
     getnotes: (state, action) => {
       state.notes = action.payload;
     },
+    getdate: (state, action) => {
+      state.date = action.payload;
+    },
+    resetmsg: state => {
+      state.errormsg = null;
+      state.successmsg = null;
+    },
   },
   extraReducers: build => {
     build.addCase(getHistory.pending, state => {
@@ -50,10 +57,32 @@ export const transaction = createSlice({
         state.successmsg = successmsg;
       }
     });
+    build.addCase(transferTo.pending, state => {
+      state.errormsg = null;
+      state.successmsg = null;
+    });
+    build.addCase(transferTo.fulfilled, (state, action) => {
+      state.successmsg = action.payload?.massage;
+    });
+    build.addCase(topUp.pending, state => {
+      state.errormsg = null;
+      state.successmsg = null;
+    });
+    build.addCase(topUp.fulfilled, (state, action) => {
+      state.successmsg = action.payload?.massage;
+    });
   },
 });
 
 export default transaction.reducer;
 export {getHistory};
-export const {getimage, getname, getphone, getreceiver, getamount, getnotes} =
-  transaction.actions;
+export const {
+  getimage,
+  getname,
+  getphone,
+  getreceiver,
+  getamount,
+  getnotes,
+  getdate,
+  resetmsg,
+} = transaction.actions;
