@@ -34,45 +34,49 @@ const Transaction = ({navigation}) => {
   }, []);
   return (
     <>
-      <ScrollView style={styleLocal.scrollView}>
-        <View style={styleLocal.wrapper}>
-          <View style={styleLocal.wrapInner}>
-            <Icon
-              name="arrow-down"
-              color={SUCCESS_COLOR}
-              size={25}
-              style={styleLocal.iconStyle}
-            />
-            <Text style={styles.textBalance}>Income</Text>
-            <Text style={styles.textSaldo}>120000</Text>
-          </View>
-          <View style={styleLocal.wrapInner}>
-            <Icon
-              name="arrow-up"
-              color={WARNING_COLOR}
-              size={25}
-              style={styleLocal.iconStyle}
-            />
-            <Text style={styles.textBalance}>Expense</Text>
-            <Text style={styles.textSaldo}>120000</Text>
-          </View>
-        </View>
-        <Image
-          style={styleLocal.graphic}
-          source={{
-            uri: GRAPHIC,
-            width: Dimensions.get('screen').width - 50,
-            height: 250,
-          }}
-        />
-      </ScrollView>
-      <View style={styles.wrapTextHome}>
-        <Text style={styles.homeText18px}>Transaction History</Text>
-        <TouchableOpacity>
-          <Text style={styles.text14pxSec}>See all</Text>
-        </TouchableOpacity>
-      </View>
       <FlatList
+        ListHeaderComponent={
+          <>
+            <View>
+              <View style={styleLocal.wrapper}>
+                <View style={styleLocal.wrapInner}>
+                  <Icon
+                    name="arrow-down"
+                    color={SUCCESS_COLOR}
+                    size={25}
+                    style={styleLocal.iconStyle}
+                  />
+                  <Text style={styles.textBalance}>Income</Text>
+                  <Text style={styles.textSaldo}>120000</Text>
+                </View>
+                <View style={styleLocal.wrapInner}>
+                  <Icon
+                    name="arrow-up"
+                    color={WARNING_COLOR}
+                    size={25}
+                    style={styleLocal.iconStyle}
+                  />
+                  <Text style={styles.textBalance}>Expense</Text>
+                  <Text style={styles.textSaldo}>120000</Text>
+                </View>
+              </View>
+              <Image
+                style={styleLocal.graphic}
+                source={{
+                  uri: GRAPHIC,
+                  width: Dimensions.get('screen').width - 50,
+                  height: 250,
+                }}
+              />
+              <View style={styles.wrapTextHome}>
+                <Text style={styles.homeText18px}>Transaction History</Text>
+                <TouchableOpacity>
+                  <Text style={styles.text14pxSec}>See all</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </>
+        }
         style={styleLocal.wrapCard}
         data={data}
         renderItem={({item}) => (

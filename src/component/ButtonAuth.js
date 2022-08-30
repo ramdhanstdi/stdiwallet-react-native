@@ -29,6 +29,7 @@ const styleLocal = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: SECONDARY_COLOR,
     marginBottom: 15,
+    borderRadius: 15,
   },
   text: {
     fontSize: 18,

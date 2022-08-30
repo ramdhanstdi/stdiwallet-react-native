@@ -8,6 +8,7 @@ import {ErrorMessage, Formik} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {register} from '../redux/asyncAction/auth';
+import {getEmail, resetmsg} from '../redux/reducers/auth';
 
 const registerSchema = Yup.object().shape({
   username: Yup.string()
@@ -88,6 +89,8 @@ const FormRegister = ({
 
 const Register = ({navigation}) => {
   const successmsg = useSelector(state => state.auth.successmsg);
+  const errormsg = useSelector(state => state.auth.errormsg);
+  console.log(errormsg);
   const dispatch = useDispatch();
   const onSubmit = val => {
     const request = {
@@ -96,14 +99,17 @@ const Register = ({navigation}) => {
       password: val.password,
     };
     dispatch(register(request));
+    dispatch(getEmail(val.email));
   };
   React.useEffect(() => {
     if (successmsg) {
-      navigation.navigate('Login');
+      dispatch(resetmsg());
+      navigation.navigate('CreatePin');
     }
-  }, [successmsg]);
+  }, [errormsg]);
   return (
     <>
+      {errormsg && <Text style={styles.warning}>{errormsg}</Text>}
       <ScrollView contentContainerStyle={styles.wrapper}>
         <Auth />
         <View style={styles.wrapperBody}>

@@ -44,32 +44,40 @@ const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
 const FinReceiver = ({navigation}) => {
   const allprofile = useSelector(state => state.profile.allprofile);
   const pagination = useSelector(state => state.profile.page);
-  console.log(pagination);
+  let page = pagination.curretPage;
   const dispatch = useDispatch();
+  const bool = '';
+  const nextPage = () => {
+    page++;
+    console.log(page);
+    dispatch(getAllProfile({page, bool: true}));
+  };
+  const onRefresh = () => {
+    page = 1;
+    dispatch(getAllProfile({page}));
+  };
   const onSubmit = val => {
     console.log(val);
   };
-  let result = [];
-  const getData = item => {
-    return (result = [item]);
+  const PassingData = (item) => {
+    console.log(item);
   };
-  const PassingData = () => {
-    console.log(result);
-    navigation.navigate('Transfer');
-  };
-  React.useEffect(() => {
-    dispatch(getAllProfile());
-  }, []);
   return (
     <>
-      <Formik onSubmit={onSubmit} initialValues={{searching: ''}}>
-        {props => <FormInput {...props} />}
-      </Formik>
-      <Text style={styles.homeText18px}> All Contact</Text>
+      <View>
+        <Formik onSubmit={onSubmit} initialValues={{searching: ''}}>
+          {props => <FormInput {...props} />}
+        </Formik>
+        <Text style={styles.homeText18px}> All Contact</Text>
+      </View>
       <FlatList
+        onRefresh={() => onRefresh()}
+        refreshing={false}
+        onEndReached={() => nextPage()}
+        onEndReachedThreshold={0.1}
         data={allprofile}
         renderItem={({item}) => (
-          <TouchableOpacity onBlur={getData(item)} onPress={PassingData}>
+          <TouchableOpacity onPress={() => PassingData(item)}>
             <Card item={item} />
           </TouchableOpacity>
         )}

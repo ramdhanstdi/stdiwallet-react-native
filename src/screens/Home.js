@@ -22,7 +22,6 @@ const Home = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const profile = useSelector(state => state.profile.data);
   const history = useSelector(state => state.transaction.data);
-  console.log(history);
   if (!token) {
     navigation.navigate('Login');
   }
@@ -67,7 +66,7 @@ const Home = ({navigation}) => {
         </View>
       </View>
       <FlatList
-        data=""
+        data={history}
         renderItem={({item}) => (
           <TouchableOpacity>
             <Card item={item} />

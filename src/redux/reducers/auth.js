@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {login, register} from '../asyncAction/auth';
+import {login, register, createPin} from '../asyncAction/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
@@ -7,6 +7,7 @@ const initialState = {
   id: '',
   errormsg: '',
   successmsg: '',
+  email: '',
 };
 
 export const auth = createSlice({
@@ -15,6 +16,13 @@ export const auth = createSlice({
   reducers: {
     logOut: () => {
       return initialState;
+    },
+    getEmail: (state, action) => {
+      state.email = action.payload;
+    },
+    resetmsg: state => {
+      state.successmsg = null;
+      state.errormsg = null;
     },
   },
   extraReducers: build => {
@@ -37,10 +45,18 @@ export const auth = createSlice({
     });
     build.addCase(register.fulfilled, (state, action) => {
       state.successmsg = action.payload?.massage;
+      state.errormsg = action.payload?.error;
+    });
+    build.addCase(createPin.pending, state => {
+      state.errormsg = null;
+      state.successmsg = null;
+    });
+    build.addCase(createPin.fulfilled, (state, action) => {
+      state.successmsg = action.payload?.massage;
     });
   },
 });
 
 export default auth.reducer;
 export {login};
-export const {logOut} = auth.actions;
+export const {logOut, getEmail, resetmsg} = auth.actions;

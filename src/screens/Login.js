@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
 import {login} from '../redux/asyncAction/auth';
 import {SUCCESS_COLOR, TEXT_DARK} from '../styles/const';
+import {resetmsg} from '../redux/reducers/auth';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid Email Format').required('Required'),
@@ -78,7 +79,6 @@ const FormLogin = ({
 const Login = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const errormsg = useSelector(state => state.auth.errormsg);
-  console.log(errormsg);
   const successmsg = useSelector(state => state.auth.successmsg);
   const dispatch = useDispatch();
   const onSubmit = val => {
@@ -87,6 +87,7 @@ const Login = ({navigation}) => {
     const request = {email, password};
     dispatch(login(request));
   };
+  setTimeout(() => dispatch(resetmsg()), 5000);
   React.useEffect(() => {
     if (token) {
       navigation.navigate('HomeTab');

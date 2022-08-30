@@ -3,14 +3,15 @@ import React from 'react';
 import {FormPin} from '../screens/CreatePin';
 import {Formik} from 'formik';
 import styles from '../styles/global';
+import {useDispatch} from 'react-redux';
+import {setpin} from '../redux/reducers/changePin';
 
 const ChangePin = ({navigation}) => {
+  const dispatch = useDispatch();
   const [pin, setPin] = React.useState('');
   const onSubmit = val => {
-    console.log(val);
-    console.log(pin);
+    dispatch(setpin(pin));
     navigation.navigate('New Pin');
-    //disini untuk fungsi register lempar ke Crate pin
   };
   return (
     <>

@@ -8,11 +8,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { SUCCESS_COLOR } from '../styles/const';
 
 const CreatePinSuccess = ({navigation}) => {
-  const onSubmit = val => {
-    console.log(val);
-    navigation.navigate('Home');
-    //disini untuk fungsi register lempar ke Crate pin
-  };
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>
@@ -22,13 +17,13 @@ const CreatePinSuccess = ({navigation}) => {
             <Icon name="check-circle" size={70} color={SUCCESS_COLOR} />
           </View>
           <View>
-            <Text style={styles.authTitle}>Login</Text>
+            <Text style={styles.authTitle}>PIN Successfully Created</Text>
           </View>
           <Text style={styles.textSmall}>
-            Login to your existing account to access all the features in STD
-            iWallet.
+          Your PIN was successfully created and you can now access all the features in iWallet. Login to your new account and start exploring!
+          <Text>{'\n'}</Text>
           </Text>
-          <ButtonAuth style={styles.button} title="submit" text="Confirm" />
+          <ButtonAuth style={styles.button} action={navigation.navigate('Login')} title="submit" text="Login Now" />
         </View>
       </ScrollView>
     </>

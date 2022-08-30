@@ -17,6 +17,9 @@ import {SECONDARY_COLOR, TEXT_DARK, TEXT_LIGHT} from '../styles/const';
 import * as Yup from 'yup';
 import PinView from 'react-native-pin-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {useDispatch, useSelector} from 'react-redux';
+import {createPin} from '../redux/asyncAction/auth';
+import {resetmsg} from '../redux/reducers/auth';
 
 export const FormPin = ({handleSubmit, setPin}) => {
   const refPin = React.useRef(null);
@@ -63,14 +66,20 @@ export const FormPin = ({handleSubmit, setPin}) => {
 
 const CreatePin = ({navigation}) => {
   const [pin, setPin] = React.useState('');
-  const [pinReady, setPinReady] = React.useState(true);
-  const maxlength = 6;
+  const successmsg = useSelector(state => state.auth.successmsg);
+  const email = useSelector(state => state.auth.email);
+  const dispatch = useDispatch();
   const onSubmit = val => {
-    console.log(val);
     console.log(pin);
-    navigation.navigate('Login');
-    //disini untuk fungsi register lempar ke Crate pin
+    const request = {email, pin: pin};
+    dispatch(createPin(request));
   };
+  React.useEffect(() => {
+    dispatch(resetmsg());
+    if (successmsg) {
+      navigation.navigate('CreatePinSuccess');
+    }
+  }, [successmsg]);
   return (
     <>
       <ScrollView contentContainerStyle={styles.wrapper}>

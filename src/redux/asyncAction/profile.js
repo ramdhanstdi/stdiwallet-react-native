@@ -66,16 +66,21 @@ export const changePass = createAsyncThunk(
   },
 );
 
-export const getAllProfile = createAsyncThunk('/profile/all', async () => {
-  const results = {};
-  try {
-    const {data} = await http().get('/admin/profile');
-    results.data = data.result;
-    results.page = data.pageInfo;
-    results.massage = data.massage;
-    return results;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
-});
+export const getAllProfile = createAsyncThunk(
+  '/profile/all',
+  async ({page, bool}) => {
+    const results = {};
+    const pages = page ? page : 1;
+    console.log(page);
+    try {
+      const {data} = await http().get(`/admin/profile?page=${pages}`);
+      results.data = data.result;
+      results.page = data.pageInfo;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
