@@ -18,13 +18,15 @@ const Main = () => {
   return (
     <NavigationContainer>
       {token ? (
-        <Stack.Navigator>
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="HomeStack"
-            component={HomeStack}
-          />
-        </Stack.Navigator>
+        <>
+          <Stack.Navigator>
+            <Stack.Screen
+              options={{headerShown: false}}
+              name="HomeStack"
+              component={HomeStack}
+            />
+          </Stack.Navigator>
+        </>
       ) : (
         <Stack.Navigator>
           <Stack.Screen

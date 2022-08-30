@@ -16,14 +16,12 @@ import Card from '../component/Card';
 import styles from '../styles/global';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllProfile} from '../redux/asyncAction/profile';
-
-const data = [
-  {name: 'Alex', type: '08435734', image: null},
-  {name: 'Ali', type: '094576357', image: null},
-  {name: 'Buro', type: '906780879', image: null},
-  {name: 'Bani', type: '5264563456', image: null},
-  {name: 'Bani', type: '674687468', image: null},
-];
+import {
+  getimage,
+  getname,
+  getphone,
+  getreceiver,
+} from '../redux/reducers/transaction';
 
 const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
   return (
@@ -59,8 +57,13 @@ const FinReceiver = ({navigation}) => {
   const onSubmit = val => {
     console.log(val);
   };
-  const PassingData = (item) => {
-    console.log(item);
+  const PassingData = item => {
+    const name = `${item.first_name} ${item.last_name}`;
+    dispatch(getname(name));
+    dispatch(getimage(item.profile_photo));
+    dispatch(getphone(item.num_phone));
+    dispatch(getreceiver(item.user_id));
+    navigation.navigate('Transfer');
   };
   return (
     <>

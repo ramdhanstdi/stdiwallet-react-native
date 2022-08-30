@@ -1,9 +1,7 @@
-import {View, Text} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeTab from './HomeTab';
 import FinReceiver from './FinReceiver';
-import Transfer from './Transfer';
 import Confirmation from './Confirmation';
 import EnterPin from './EnterPin';
 import StatusSucces from './StatusSucces';
@@ -17,6 +15,7 @@ import ConfimPin from './ConfimPin';
 import ChangePass from './ChangePass';
 import Notification from './Notification';
 import EditProfile from './EditProfile';
+import InputAmount from './InputAmount';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +28,7 @@ const HomeStack = () => {
         component={HomeTab}
       />
       <Stack.Screen name="Find Receiver" component={FinReceiver} />
-      <Stack.Screen name="Transfer" component={Transfer} />
+      <Stack.Screen name="Transfer" component={InputAmount} />
       <Stack.Screen name="Confirmation" component={Confirmation} />
       <Stack.Screen name="Enter Your Pin" component={EnterPin} />
       <Stack.Screen name="Top Up" component={TopUp} />

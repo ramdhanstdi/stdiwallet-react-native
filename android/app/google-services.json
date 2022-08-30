@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "816671421688",
+    "project_id": "stdiwallet",
+    "storage_bucket": "stdiwallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:816671421688:android:beca99b4767fb4c0a2f70d",
+        "android_client_info": {
+          "package_name": "com.stdiwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "816671421688-50ag32jv2f9j0iu3uo06k2l1ie27gj64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwS1te80oUwy2eHSM_2WluaTKBPy3S03I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "816671421688-50ag32jv2f9j0iu3uo06k2l1ie27gj64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
