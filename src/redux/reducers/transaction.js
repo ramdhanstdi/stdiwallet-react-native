@@ -63,6 +63,7 @@ export const transaction = createSlice({
     });
     build.addCase(transferTo.fulfilled, (state, action) => {
       state.successmsg = action.payload?.massage;
+      state.errormsg = action.payload?.error;
     });
     build.addCase(topUp.pending, state => {
       state.errormsg = null;

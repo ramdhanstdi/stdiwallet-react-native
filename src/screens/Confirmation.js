@@ -14,7 +14,7 @@ import {getUserLogin} from '../redux/asyncAction/profile';
 import {useDispatch, useSelector} from 'react-redux';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import {CARD_COLOR, TEXT_DARK} from '../styles/const';
-import {getdate} from '../redux/reducers/transaction';
+import {getdate, resetmsg} from '../redux/reducers/transaction';
 
 const Confirmation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ const Confirmation = ({navigation}) => {
     navigation.navigate('Enter Your Pin');
   };
   React.useEffect(() => {
+    dispatch(resetmsg());
     dispatch(getUserLogin(token));
   }, []);
   return (

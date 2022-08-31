@@ -1,18 +1,30 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CardDetails from '../component/CardDetails';
-import Card from '../component/Card';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {SUCCESS_COLOR} from '../styles/const';
-
-const data = {name: 'Alex', type: '08435734', image: null};
+import {DEFAULT_IMG} from '../assets/defaultimg';
+import {useDispatch, useSelector} from 'react-redux';
+import { getUserLogin } from '../redux/asyncAction/profile';
 
 const StatusSucces = ({navigation}) => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.token);
+  const profile = useSelector(state => state.profile.data);
+  const name = useSelector(state => state.transaction.name);
+  const image = useSelector(state => state.transaction.image);
+  const phone = useSelector(state => state.transaction.phone);
+  const amount = useSelector(state => state.transaction.amount);
+  const notes = useSelector(state => state.transaction.notes);
+  const time = useSelector(state => state.transaction.date);
   const submit = () => {
     navigation.navigate('HomeTab');
   };
+  React.useEffect(() => {
+    dispatch(getUserLogin(token));
+  }, []);
   return (
     <ScrollView>
       <View style={styleLocal.wrapStatus}>
@@ -21,13 +33,25 @@ const StatusSucces = ({navigation}) => {
       </View>
       <View style={styles.wrapDetails}>
         <Text style={styles.homeText18px}> Details</Text>
-        <CardDetails smalText="Amount" bigText="Rp 10.000" />
-        <CardDetails smalText="Balance Left" bigText="Rp20.000" />
-        <CardDetails smalText="Date & Time" bigText="May 11, 2020 - 12.20" />
-        <CardDetails smalText="Notes" bigText="Pala bapak kau" />
+        <CardDetails smalText="Amount" bigText={amount} />
+        <CardDetails smalText="Balance Left" bigText={profile.balance} />
+        <CardDetails smalText="Date & Time" bigText={time} />
+        <CardDetails smalText="Notes" bigText={notes} />
         <Text style={styles.homeText18px}>Transfer to</Text>
         <View style={styleLocal.side}>
-          <Card item={data} />
+          <View style={styleLocal.wrapper}>
+            <View style={styleLocal.wrapLeft}>
+              {Image ? (
+                <Image source={{uri: image, width: 50, height: 50}} />
+              ) : (
+                <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
+              )}
+              <View style={styleLocal.wrapText}>
+                <Text style={styleLocal.textName}>{name}</Text>
+                <Text style={styles.text14px}>{phone}</Text>
+              </View>
+            </View>
+          </View>
         </View>
         <View style={styles.button}>
           <ButtonAuth text="Confirm" action={submit} />

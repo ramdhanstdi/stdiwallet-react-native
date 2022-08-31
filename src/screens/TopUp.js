@@ -48,6 +48,7 @@ const TopUp = () => {
     if (successmsg) {
       dispatch(resetmsg());
       dispatch(getUserLogin(token));
+      setShow(false);
     }
   }, [successmsg]);
   return (
@@ -104,11 +105,11 @@ const TopUp = () => {
         visible={show}
         onRequestClose={() => setShow(!show)}>
         <View style={styleLocal.wrapModal}>
-          <Text style={styleLocal.titleModal}>Hola</Text>
+          <Text style={styleLocal.titleModal}>Input Amount Here</Text>
           <TextInput
             style={styleLocal.input}
             keyboardType="decimal-pad"
-            placeholder="Min 2000"
+            placeholder="Min 20000"
             value={amount}
             onChangeText={setAmount}
           />

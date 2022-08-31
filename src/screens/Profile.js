@@ -35,13 +35,17 @@ const Profile = ({navigation}) => {
     <>
       <ScrollView>
         <View style={styleLocal.wrapHead}>
-          <Image
-            source={{
-              uri: profile.profile_photo ? profile.profile_photo : DEFAULT_IMG,
-              width: 70,
-              height: 70,
-            }}
-          />
+          <View style={styleLocal.picture}>
+            <Image
+              source={{
+                uri: profile.profile_photo
+                  ? profile.profile_photo
+                  : DEFAULT_IMG,
+                width: 70,
+                height: 70,
+              }}
+            />
+          </View>
           <TouchableOpacity
             style={styleLocal.edit}
             onPress={() => navigation.navigate('Edit Profile')}>
@@ -83,6 +87,10 @@ const styleLocal = StyleSheet.create({
   wrapHead: {
     alignItems: 'center',
     marginTop: 68,
+  },
+  picture: {
+    borderRadius: 35,
+    overflow: 'hidden',
   },
   edit: {
     marginVertical: 10,

@@ -32,6 +32,23 @@ export const editProfile = createAsyncThunk(
   },
 );
 
+export const uploadPhoto = createAsyncThunk(
+  '/profile/upload',
+  async ({token, request}) => {
+    const results = {};
+    try {
+      const send = qs.stringify(request);
+      const {data} = await http(token).patch('/profile', send);
+      results.data = data.result;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
+
 export const addNumber = createAsyncThunk(
   '/profile/AddNumber',
   async ({token, num_phone}) => {

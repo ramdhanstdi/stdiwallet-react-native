@@ -6,6 +6,7 @@ import styles from '../styles/global';
 import {useDispatch, useSelector} from 'react-redux';
 import {transferTo} from '../redux/asyncAction/transaction';
 import {resetmsg} from '../redux/reducers/transaction';
+import {getUserLogin} from '../redux/asyncAction/profile';
 
 const EnterPin = ({navigation}) => {
   const dispatch = useDispatch();
@@ -15,20 +16,22 @@ const EnterPin = ({navigation}) => {
   const notes = useSelector(state => state.transaction.notes);
   const receiver = useSelector(state => state.transaction.receiver);
   const successmsg = useSelector(state => state.transaction.successmsg);
+  const errormsg = useSelector(state => state.transaction.errormsg);
   const [pin, setPin] = React.useState('');
   const onSubmit = val => {
-    const request = {time, amount, notes, receiver};
+    const request = {time, amount, notes, receiver, pin};
     dispatch(transferTo({token, request}));
-    console.log(pin);
   };
   React.useEffect(() => {
     if (successmsg) {
       dispatch(resetmsg());
+      dispatch(getUserLogin(token));
       navigation.navigate('StatusSucces');
     }
-  }, [successmsg]);
+  }, [errormsg]);
   return (
     <>
+      {errormsg && <Text style={styles.warning}>{errormsg}</Text>}
       <View style={styleLocal.wrap}>
         <Text style={styles.smallText}>
           Enter your 6 digits PIN for confirmation to continue transferring

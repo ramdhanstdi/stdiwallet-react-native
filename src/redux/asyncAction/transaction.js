@@ -27,10 +27,16 @@ export const transferTo = createAsyncThunk(
       console.log(data);
       results.data = data.result;
       results.massage = data.massage;
+      PushNotification.localNotification({
+        channelId: 'general',
+        title: 'STD iWallet',
+        message: `${data.massage}`,
+      });
       return results;
     } catch (e) {
       console.log(e);
-      return e;
+      results.error = e.response.data.massage;
+      return results;
     }
   },
 );

@@ -64,6 +64,10 @@ const FinReceiver = ({navigation}) => {
     dispatch(getreceiver(item.user_id));
     navigation.navigate('Transfer');
   };
+  React.useEffect(() => {
+    page = 1;
+    dispatch(getAllProfile({page}));
+  },[]);
   return (
     <>
       <View>

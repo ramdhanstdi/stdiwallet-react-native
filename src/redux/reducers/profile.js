@@ -5,6 +5,7 @@ import {
   editProfile,
   addNumber,
   changePass,
+  uploadPhoto,
 } from '../asyncAction/profile';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -52,6 +53,18 @@ export const profile = createSlice({
       state.successmsg = null;
     });
     build.addCase(editProfile.fulfilled, (state, action) => {
+      const data = action.payload?.data;
+      const successmsg = action.payload?.massage;
+      if (data) {
+        state.data = data;
+        state.successmsg = successmsg;
+      }
+    });
+    build.addCase(uploadPhoto.pending, state => {
+      state.errormsg = null;
+      state.successmsg = null;
+    });
+    build.addCase(uploadPhoto.fulfilled, (state, action) => {
       const data = action.payload?.data;
       const successmsg = action.payload?.massage;
       if (data) {
