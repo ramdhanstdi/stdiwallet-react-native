@@ -32,7 +32,7 @@ const FormInput = ({handleChange, handleBlur, handleSubmit}) => {
         onChangeText={handleChange('searching')}
         name="searching"
         type="text"
-        placeholder="Search Here"
+        placeholder="Search Number Here"
       />
     </View>
   );
@@ -67,7 +67,7 @@ const FinReceiver = ({navigation}) => {
   React.useEffect(() => {
     page = 1;
     dispatch(getAllProfile({page}));
-  },[]);
+  }, []);
   return (
     <>
       <View>

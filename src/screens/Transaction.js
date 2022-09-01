@@ -15,22 +15,14 @@ import styles from '../styles/global';
 import {GRAPHIC} from '../assets/defaultimg';
 import Card from '../component/Card';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserLogin} from '../redux/asyncAction/profile';
-
-const data = [
-  {name: 'Alex', type: 'Send', image: null, amount: 1000},
-  {name: 'Ali', type: 'Receive', image: null, amount: 1000},
-  {name: 'Buro', type: 'Send', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-];
+import {getHistory} from '../redux/asyncAction/transaction';
 
 const Transaction = ({navigation}) => {
-  const profile = useSelector(state => state.profile.data);
+  const history = useSelector(state => state.transaction.data);
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getUserLogin(token));
+    dispatch(getHistory(token));
   }, []);
   return (
     <>
@@ -78,7 +70,7 @@ const Transaction = ({navigation}) => {
           </>
         }
         style={styleLocal.wrapCard}
-        data={data}
+        data={history}
         renderItem={({item}) => (
           <TouchableOpacity>
             <Card item={item} />

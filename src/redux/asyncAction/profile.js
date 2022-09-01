@@ -37,8 +37,18 @@ export const uploadPhoto = createAsyncThunk(
   async ({token, request}) => {
     const results = {};
     try {
-      const send = qs.stringify(request);
-      const {data} = await http(token).patch('/profile', send);
+      console.log(request);
+      const form = new FormData();
+      form.append('photo', {
+        uri: request.uri,
+        name: request.name,
+        type: request.type,
+      });
+      const {data} = await http(token).patch('/profile', form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       results.data = data.result;
       results.massage = data.massage;
       return results;

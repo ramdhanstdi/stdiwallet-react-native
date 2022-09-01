@@ -24,7 +24,10 @@ const Card = ({item}) => {
     <View style={styleLocal.wrapper}>
       <View style={styleLocal.wrapLeft}>
         {item.profile_photo ? (
-          <Image source={{uri: item.profile_photo, width: 50, height: 50}} />
+          <Image
+            style={styleLocal.pic}
+            source={{uri: item.profile_photo, width: 50, height: 50}}
+          />
         ) : (
           <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
         )}
@@ -33,7 +36,11 @@ const Card = ({item}) => {
             style={
               styleLocal.textName
             }>{`${item.first_name} ${item.last_name}`}</Text>
-          <Text style={styles.text14px}>{item.transfertype}</Text>
+          {item.transfertype ? (
+            <Text style={styles.text14px}>{item.transfertype}</Text>
+          ) : (
+            <Text style={styles.text14px}>{item.num_phone}</Text>
+          )}
         </View>
       </View>
       <View>
@@ -52,6 +59,10 @@ const Card = ({item}) => {
 export default Card;
 
 const styleLocal = StyleSheet.create({
+  pic: {
+    borderRadius: 25,
+    overflow: 'hidden',
+  },
   wrapper: {
     height: 96,
     width: Dimensions.get('screen').width - 20,

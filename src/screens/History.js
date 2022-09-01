@@ -10,24 +10,22 @@ import {
   WARNING_COLOR,
 } from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
-import {getUserLogin} from '../redux/asyncAction/profile';
-
-const data = [
-  {name: 'Alex', type: 'Send', image: null, amount: 1000},
-  {name: 'Ali', type: 'Receive', image: null, amount: 1000},
-  {name: 'Buro', type: 'Send', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-  {name: 'Bani', type: 'Receive', image: null, amount: 1000},
-];
+import {getHistory} from '../redux/asyncAction/transaction';
 
 const History = ({navigation}) => {
+  const token = useSelector(state => state.auth.token);
+  const history = useSelector(state => state.transaction.data);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(getHistory(token));
+  }, []);
   return (
     <>
       <View style={styleLocal.wrap}>
         <Text style={styles.text14px}>This Month</Text>
       </View>
       <FlatList
-        data={data}
+        data={history}
         renderItem={({item}) => (
           <TouchableOpacity>
             <Card item={item} />

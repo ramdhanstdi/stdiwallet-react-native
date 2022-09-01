@@ -12,7 +12,7 @@ const Headers = ({textTitle, subText, image, icon, action}) => {
         <View style={styleLocal.contentHead}>
           <View style={styleLocal.contentHead}>
             {image ? (
-              <Image source={{uri: image, width: 50, height: 50}} />
+              <Image style={styleLocal.pic} source={{uri: image, width: 50, height: 50}} />
             ) : (
               <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
             )}
@@ -31,6 +31,10 @@ const Headers = ({textTitle, subText, image, icon, action}) => {
 };
 
 const styleLocal = StyleSheet.create({
+  pic: {
+    borderRadius: 25,
+    overflow: 'hidden',
+  },
   wrapper: {
     height: 112,
     width: Dimensions.get('screen').width,
