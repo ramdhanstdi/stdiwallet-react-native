@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {transferTo} from '../redux/asyncAction/transaction';
 import {resetmsg} from '../redux/reducers/transaction';
 import {getUserLogin} from '../redux/asyncAction/profile';
+import {CommonActions} from '@react-navigation/native';
 
 const EnterPin = ({navigation}) => {
   const dispatch = useDispatch();
@@ -26,7 +27,12 @@ const EnterPin = ({navigation}) => {
     if (successmsg) {
       dispatch(resetmsg());
       dispatch(getUserLogin(token));
-      navigation.navigate('StatusSucces');
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{name: 'HomeTab'}, {name: 'StatusSucces'}],
+        }),
+      );
     }
   }, [errormsg]);
   return (

@@ -1,13 +1,13 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import CardDetails from '../component/CardDetails';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {SUCCESS_COLOR} from '../styles/const';
+import {CARD_COLOR, SUCCESS_COLOR, TEXT_DARK} from '../styles/const';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import {useDispatch, useSelector} from 'react-redux';
-import { getUserLogin } from '../redux/asyncAction/profile';
+import {getUserLogin} from '../redux/asyncAction/profile';
 
 const StatusSucces = ({navigation}) => {
   const dispatch = useDispatch();
@@ -64,6 +64,24 @@ const StatusSucces = ({navigation}) => {
 export default StatusSucces;
 
 const styleLocal = StyleSheet.create({
+  wrapper: {
+    height: 96,
+    width: Dimensions.get('screen').width - 20,
+    margin: 10,
+    backgroundColor: CARD_COLOR,
+    borderRadius: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    justifyContent: 'space-between',
+    overflow: 'hidden',
+  },
+  textName: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 22,
+    color: TEXT_DARK,
+  },
   wrapStatus: {
     alignItems: 'center',
     justifyContent: 'center',

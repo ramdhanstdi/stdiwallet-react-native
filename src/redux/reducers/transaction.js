@@ -3,6 +3,7 @@ import {getHistory, transferTo, topUp} from '../asyncAction/transaction';
 
 const initialState = {
   data: '',
+  page: '',
   errormsg: '',
   successmsg: '',
   name: '',
@@ -51,10 +52,13 @@ export const transaction = createSlice({
     });
     build.addCase(getHistory.fulfilled, (state, action) => {
       const data = action.payload?.data;
-      const successmsg = action.payload?.massage;
-      if (data) {
+      const page = action.payload?.page;
+      if (page.curretPage > 1) {
+        state.data = [...state.data, ...data];
+        state.page = page;
+      } else {
         state.data = data;
-        state.successmsg = successmsg;
+        state.page = page;
       }
     });
     build.addCase(transferTo.pending, state => {

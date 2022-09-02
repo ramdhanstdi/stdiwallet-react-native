@@ -7,7 +7,6 @@ import {
   changePass,
   uploadPhoto,
 } from '../asyncAction/profile';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
   data: '',
@@ -43,7 +42,10 @@ export const profile = createSlice({
     build.addCase(getAllProfile.fulfilled, (state, action) => {
       const data = action.payload?.data;
       const page = action.payload?.page;
-      if (data) {
+      if (page.curretPage > 1) {
+        state.page = page;
+        state.allprofile = [...state.allprofile, ...data];
+      } else {
         state.page = page;
         state.allprofile = data;
       }

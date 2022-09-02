@@ -22,12 +22,9 @@ const Home = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const profile = useSelector(state => state.profile.data);
   const history = useSelector(state => state.transaction.data);
-  if (!token) {
-    navigation.navigate('Login');
-  }
   React.useEffect(() => {
     dispatch(getUserLogin(token));
-    dispatch(getHistory(token));
+    dispatch(getHistory({token}));
   }, []);
   return (
     <>

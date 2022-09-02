@@ -3,19 +3,24 @@ import http from '../../helpers/http';
 import PushNotification from 'react-native-push-notification';
 import qs from 'qs';
 
-export const getHistory = createAsyncThunk('/trans/history', async token => {
-  const results = {};
-  try {
-    const {data} = await http(token).get('/historyTransaction');
-    console.log(data);
-    results.data = data.result;
-    results.massage = data.massage;
-    return results;
-  } catch (e) {
-    console.log(e);
-    return e;
-  }
-});
+export const getHistory = createAsyncThunk(
+  '/trans/history',
+  async ({token, page}) => {
+    const results = {};
+    try {
+      const pages = page ? page : 1;
+      const {data} = await http(token).get(`/historyTransaction?page=${pages}`);
+      console.log(data);
+      results.data = data.result;
+      results.page = data.pageInfo;
+      results.massage = data.massage;
+      return results;
+    } catch (e) {
+      console.log(e);
+      return e;
+    }
+  },
+);
 
 export const transferTo = createAsyncThunk(
   '/trans/transfer',

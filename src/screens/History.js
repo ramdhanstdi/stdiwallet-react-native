@@ -13,11 +13,26 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getHistory} from '../redux/asyncAction/transaction';
 
 const History = ({navigation}) => {
+  const dispatch = useDispatch();
   const token = useSelector(state => state.auth.token);
   const history = useSelector(state => state.transaction.data);
-  const dispatch = useDispatch();
+  const pagination = useSelector(state => state.transaction.page);
+  let page = pagination.curretPage;
+  let next = pagination.nextPage;
+  const nextPage = () => {
+    if (next === null) {
+      console.log('page empty');
+    } else {
+      page++;
+      console.log(page);
+      dispatch(getHistory({token, page}));
+    }
+  };
+  const onRefresh = () => {
+    dispatch(getHistory({token}));
+  };
   React.useEffect(() => {
-    dispatch(getHistory(token));
+    dispatch(getHistory({token}));
   }, []);
   return (
     <>
@@ -25,6 +40,10 @@ const History = ({navigation}) => {
         <Text style={styles.text14px}>This Month</Text>
       </View>
       <FlatList
+        onRefresh={() => onRefresh()}
+        refreshing={false}
+        onEndReached={() => nextPage()}
+        onEndReachedThreshold={0.5}
         data={history}
         renderItem={({item}) => (
           <TouchableOpacity>

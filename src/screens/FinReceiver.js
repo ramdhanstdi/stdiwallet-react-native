@@ -42,12 +42,16 @@ const FinReceiver = ({navigation}) => {
   const allprofile = useSelector(state => state.profile.allprofile);
   const pagination = useSelector(state => state.profile.page);
   let page = pagination.curretPage;
+  let next = pagination.nextPage;
   const dispatch = useDispatch();
-  const bool = '';
   const nextPage = () => {
-    page++;
-    console.log(page);
-    dispatch(getAllProfile({page, bool: true}));
+    if (next === null) {
+      console.log('page empty');
+    } else {
+      page++;
+      console.log(page);
+      dispatch(getAllProfile({page}));
+    }
   };
   const onRefresh = () => {
     page = 1;
@@ -65,8 +69,7 @@ const FinReceiver = ({navigation}) => {
     navigation.navigate('Transfer');
   };
   React.useEffect(() => {
-    page = 1;
-    dispatch(getAllProfile({page}));
+    dispatch(getAllProfile());
   }, []);
   return (
     <>
@@ -80,7 +83,7 @@ const FinReceiver = ({navigation}) => {
         onRefresh={() => onRefresh()}
         refreshing={false}
         onEndReached={() => nextPage()}
-        onEndReachedThreshold={0.1}
+        onEndReachedThreshold={0.5}
         data={allprofile}
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => PassingData(item)}>

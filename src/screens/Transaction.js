@@ -22,7 +22,7 @@ const Transaction = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   React.useEffect(() => {
-    dispatch(getHistory(token));
+    dispatch(getHistory({token}));
   }, []);
   return (
     <>
@@ -62,7 +62,7 @@ const Transaction = ({navigation}) => {
               />
               <View style={styles.wrapTextHome}>
                 <Text style={styles.homeText18px}>Transaction History</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('History')}>
                   <Text style={styles.text14pxSec}>See all</Text>
                 </TouchableOpacity>
               </View>
