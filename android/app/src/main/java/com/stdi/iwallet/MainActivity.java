@@ -1,4 +1,4 @@
-package com.stdiwallet;
+package com.stdi.iwallet;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -17,7 +17,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "STDiWallet";
+    return "iWallet";
   }
 
   /**

@@ -1,4 +1,4 @@
-package com.stdiwallet.newarchitecture.modules;
+package com.stdi.iwallet.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

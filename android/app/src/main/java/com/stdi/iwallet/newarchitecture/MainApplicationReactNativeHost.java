@@ -1,4 +1,4 @@
-package com.stdiwallet.newarchitecture;
+package com.stdi.iwallet.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.stdiwallet.BuildConfig;
-import com.stdiwallet.newarchitecture.components.MainComponentsRegistry;
-import com.stdiwallet.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.stdi.iwallet.BuildConfig;
+import com.stdi.iwallet.newarchitecture.components.MainComponentsRegistry;
+import com.stdi.iwallet.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
