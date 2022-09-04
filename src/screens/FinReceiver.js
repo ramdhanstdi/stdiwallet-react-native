@@ -58,7 +58,7 @@ const FinReceiver = ({navigation}) => {
     dispatch(getAllProfile({page}));
   };
   const onSubmit = val => {
-    console.log(val);
+    dispatch(getAllProfile({page: 1, search: val.searching}));
   };
   const PassingData = item => {
     const name = `${item.first_name} ${item.last_name}`;

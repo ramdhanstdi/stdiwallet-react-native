@@ -14,6 +14,7 @@ import {CARD_COLOR, TEXT_DARK} from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../redux/asyncAction/profile';
 import {logOut} from '../redux/reducers/auth';
+import {editToken} from '../redux/asyncAction/token';
 
 const CardProfile = ({text, icon, action}) => {
   return (
@@ -26,8 +27,14 @@ const CardProfile = ({text, icon, action}) => {
 
 const Profile = ({navigation}) => {
   const profile = useSelector(state => state.profile.data);
+  const tokenDevice = useSelector(state => state.token.token);
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
+  const exit = () => {
+    const token = tokenDevice;
+    dispatch(editToken({token}));
+    dispatch(logOut());
+  };
   React.useEffect(() => {
     dispatch(getUserLogin(token));
   }, []);
@@ -74,7 +81,7 @@ const Profile = ({navigation}) => {
           action={() => navigation.navigate('Change Pin')}
         />
         <CardProfile text="Notification" />
-        <CardProfile text="Logout" action={() => dispatch(logOut())} />
+        <CardProfile text="Logout" action={() => exit()} />
         <Text>{'\n'}</Text>
       </ScrollView>
     </>

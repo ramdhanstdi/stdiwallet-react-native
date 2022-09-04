@@ -5,14 +5,15 @@ import qs from 'qs';
 
 export const getHistory = createAsyncThunk(
   '/trans/history',
-  async ({token, page}) => {
+  async ({token, page, sort}) => {
     const results = {};
     try {
+      const sorts = sort ? sort : 'DESC';
       const pages = page ? page : 1;
-      const {data} = await http(token).get(`/historyTransaction?page=${pages}`);
+      const {data} = await http(token).get(`/historyTransaction?page=${pages}&sort=${sorts}`);
       console.log(data);
       results.data = data.result;
-      results.page = data.pageInfo;
+      results.page = data?.pageInfo;
       results.massage = data.massage;
       return results;
     } catch (e) {

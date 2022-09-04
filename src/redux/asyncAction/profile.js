@@ -95,14 +95,15 @@ export const changePass = createAsyncThunk(
 
 export const getAllProfile = createAsyncThunk(
   '/profile/all',
-  async ({page, bool}) => {
+  async ({page, search}) => {
     const results = {};
     const pages = page ? page : 1;
+    const searching = search ? search : '';
     console.log(page);
     try {
-      const {data} = await http().get(`/admin/profile?page=${pages}`);
+      const {data} = await http().get(`/admin/profile?page=${pages}&search=${searching}`);
       results.data = data.result;
-      results.page = data.pageInfo;
+      results.page = data?.pageInfo;
       results.massage = data.massage;
       return results;
     } catch (e) {

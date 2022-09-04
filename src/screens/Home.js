@@ -16,15 +16,28 @@ import Card from '../component/Card';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../redux/asyncAction/profile';
 import {getHistory} from '../redux/asyncAction/transaction';
+import {editToken, saveToken} from '../redux/asyncAction/token';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.auth.token);
+  const id = useSelector(state => state.auth.id);
   const profile = useSelector(state => state.profile.data);
   const history = useSelector(state => state.transaction.data);
+  const tokenDevice = useSelector(state => state.token.token);
   React.useEffect(() => {
     dispatch(getUserLogin(token));
     dispatch(getHistory({token}));
+    if (tokenDevice) {
+      const user_id = id;
+      const token = tokenDevice;
+      dispatch(editToken({token, user_id}));
+    } else {
+      const user_id = id;
+      const token = tokenDevice;
+      const request = {token, user_id};
+      dispatch(saveToken(request));
+    }
   }, []);
   return (
     <>

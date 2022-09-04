@@ -11,9 +11,11 @@ import {
 } from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {getHistory} from '../redux/asyncAction/transaction';
+import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 
 const History = ({navigation}) => {
   const dispatch = useDispatch();
+  const [sort, setSort] = React.useState('ASC');
   const token = useSelector(state => state.auth.token);
   const history = useSelector(state => state.transaction.data);
   const pagination = useSelector(state => state.transaction.page);
@@ -25,15 +27,15 @@ const History = ({navigation}) => {
     } else {
       page++;
       console.log(page);
-      dispatch(getHistory({token, page}));
+      dispatch(getHistory({token, page, sort}));
     }
   };
   const onRefresh = () => {
-    dispatch(getHistory({token}));
+    dispatch(getHistory({token, sort}));
   };
   React.useEffect(() => {
-    dispatch(getHistory({token}));
-  }, []);
+    dispatch(getHistory({token, sort}));
+  }, [sort]);
   return (
     <>
       <View style={styleLocal.wrap}>
@@ -53,12 +55,12 @@ const History = ({navigation}) => {
       />
       <View style={styleLocal.wrapButton}>
         <View style={styleLocal.buttonLeft}>
-          <View style={styleLocal.button}>
+          <TouchableOpacity onPress={() => setSort('ASC')} style={styleLocal.button}>
             <Icon name="arrow-up" color={WARNING_COLOR} size={25} />
-          </View>
-          <View style={styleLocal.button}>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => setSort('DESC')} style={styleLocal.button}>
             <Icon name="arrow-down" color={SUCCESS_COLOR} size={25} />
-          </View>
+          </TouchableOpacity>
         </View>
         <View style={styleLocal.buttonRight}>
           <Text style={styleLocal.Text}>Filter By Date</Text>

@@ -9,11 +9,29 @@ import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import CreatePinSuccess from './CreatePinSuccess';
 import HomeStack from './HomeStack';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import PushNotification from 'react-native-push-notification';
+import {saveToken} from '../redux/asyncAction/token';
 
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
+  const dispatch = useDispatch();
+  const tokenDevice = useSelector(state => state.token.token);
+  PushNotification.configure({
+    onRegister: token => {
+      console.log('TOKEN:', token);
+      if (tokenDevice !== token.token) {
+        dispatch(saveToken({token: token.token}));
+      }
+    },
+    onNotification: notification => {
+      console.log('Notifocation:', notification);
+      notification.finish(() => {
+        console.log('Finish');
+      });
+    },
+  });
   const token = useSelector(state => state.auth.token);
   return (
     <NavigationContainer>
