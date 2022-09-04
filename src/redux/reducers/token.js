@@ -11,7 +11,7 @@ const tokenDevice = createSlice({
   initialState,
   reducers: {
     resetToken: state => {
-      state.token = null;
+      state.receiverToken = null;
     },
   },
   extraReducers: build => {
