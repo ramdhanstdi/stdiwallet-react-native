@@ -6,12 +6,15 @@ export const saveToken = createAsyncThunk('/token/save', async request => {
   const results = {};
   try {
     const send = qs.stringify(request);
+    console.log(send);
     const {data} = await http().post('/token', send);
     console.log(data);
     results.data = data.result;
     return results;
   } catch (e) {
     console.log(e);
+    results.error = e;
+    return results;
   }
 });
 

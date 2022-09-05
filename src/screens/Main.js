@@ -22,7 +22,8 @@ const Main = () => {
     onRegister: token => {
       console.log('TOKEN:', token);
       if (tokenDevice !== token.token) {
-        dispatch(saveToken({token: token.token}));
+        const request = {token: token.token};
+        dispatch(saveToken(request));
       }
     },
     onNotification: notification => {
