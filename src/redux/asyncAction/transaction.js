@@ -10,7 +10,9 @@ export const getHistory = createAsyncThunk(
     try {
       const sorts = sort ? sort : 'DESC';
       const pages = page ? page : 1;
-      const {data} = await http(token).get(`/historyTransaction?page=${pages}&sort=${sorts}`);
+      const {data} = await http(token).get(
+        `/historyTransaction?page=${pages}&sort=${sorts}`,
+      );
       console.log(data);
       results.data = data.result;
       results.page = data?.pageInfo;
@@ -29,6 +31,7 @@ export const transferTo = createAsyncThunk(
     const results = {};
     try {
       const send = qs.stringify(request);
+      console.log(send);
       const {data} = await http(token).post('/transfer', send);
       console.log(data);
       results.data = data.result;

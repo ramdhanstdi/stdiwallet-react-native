@@ -67,7 +67,6 @@ const FinReceiver = ({navigation}) => {
     dispatch(getimage(item.profile_photo));
     dispatch(getphone(item.num_phone));
     dispatch(getreceiver(item.user_id));
-    dispatch(getToken(item.user_id));
     navigation.navigate('Transfer');
   };
   React.useEffect(() => {

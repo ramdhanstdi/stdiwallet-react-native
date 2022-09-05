@@ -15,6 +15,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import {CARD_COLOR, TEXT_DARK} from '../styles/const';
 import {getdate, resetmsg} from '../redux/reducers/transaction';
+import {getToken} from '../redux/asyncAction/token';
 
 const Confirmation = ({navigation}) => {
   const dispatch = useDispatch();
@@ -24,11 +25,13 @@ const Confirmation = ({navigation}) => {
   const image = useSelector(state => state.transaction.image);
   const phone = useSelector(state => state.transaction.phone);
   const amount = useSelector(state => state.transaction.amount);
+  const receiver = useSelector(state => state.transaction.receiver);
   const date = new Date().toISOString();
   console.log(amount);
   const notes = useSelector(state => state.transaction.notes);
   const onSubmit = val => {
     dispatch(getdate(date));
+    dispatch(getToken(receiver));
     navigation.navigate('Enter Your Pin');
   };
   React.useEffect(() => {

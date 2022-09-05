@@ -34,15 +34,17 @@ export const editToken = createAsyncThunk(
   },
 );
 
-export const getToken = createAsyncThunk('/token/delete', async ({userid}) => {
+export const getToken = createAsyncThunk('/token/delete', async receiver => {
   const results = {};
   try {
-    const {data} = await http().get(`/token/${userid}`);
+    console.log('INI', receiver);
+    const {data} = await http().get(`/token/${receiver}`);
     console.log(data);
     results.data = data.result;
     return results;
   } catch (e) {
     console.log(e);
+    return e;
   }
 });
 
