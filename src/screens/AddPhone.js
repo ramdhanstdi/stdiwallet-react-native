@@ -5,7 +5,6 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import * as Yup from 'yup';
 import ButtonAuth from '../component/ButtonAuth';
-import {SUCCESS_COLOR, TEXT_DARK, WARNING_COLOR} from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {addNumber, getUserLogin} from '../redux/asyncAction/profile';
 
@@ -54,12 +53,19 @@ export default function AddPhone({navigation}) {
       (val.phone[0] === '0' && val.phone[1] === '8') ||
       val.phone.includes('+62')
     ) {
-      dispatch(addNumber({token, num_phone: val.phone}));
-      setTimeout(() => navigation.navigate('Personal Information'), 3 * 1000);
+      const request = {num_phone: val.phone};
+      dispatch(addNumber({token, request}));
     } else {
       setWarning('Invalid Format Number');
     }
   };
+  React.useEffect(() => {
+    if (successmsg) {
+      setTimeout(() => dispatch(getUserLogin(token)), 3 * 1000);
+    } else {
+      dispatch(getUserLogin(token));
+    }
+  }, [successmsg]);
   return (
     <>
       {warning && <Text style={styles.warning}>{warning}</Text>}

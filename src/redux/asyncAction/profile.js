@@ -61,16 +61,17 @@ export const uploadPhoto = createAsyncThunk(
 
 export const addNumber = createAsyncThunk(
   '/profile/AddNumber',
-  async ({token, num_phone}) => {
+  async ({token, request}) => {
     const results = {};
     try {
-      const send = qs.stringify({num_phone});
+      const send = qs.stringify(request);
+      console.log(send);
       const {data} = await http(token).patch('/number', send);
       results.data = data.result;
       results.massage = data.massage;
       return results;
     } catch (e) {
-      console.log(e);
+      console.log(e.response.data.result);
       return e;
     }
   },
