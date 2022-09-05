@@ -82,6 +82,9 @@ const styleLocal = StyleSheet.create({
     lineHeight: 22,
     color: TEXT_DARK,
   },
+  wrapText: {
+    marginLeft: 15,
+  },
   wrapStatus: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -89,5 +92,8 @@ const styleLocal = StyleSheet.create({
   },
   side: {
     marginLeft: -10,
+  },
+  wrapLeft: {
+    flexDirection: 'row',
   },
 });
