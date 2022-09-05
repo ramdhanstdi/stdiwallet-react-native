@@ -21,6 +21,12 @@ const tokenDevice = createSlice({
     build.addCase(getToken.fulfilled, (state, action) => {
       state.receiverToken = action.payload?.data.token;
     });
+    build.addCase(saveToken.pending, state => {
+      state.token = null;
+    });
+    build.addCase(saveToken.fulfilled, (state, action) => {
+      state.token = action.payload?.data.token;
+    });
   },
 });
 

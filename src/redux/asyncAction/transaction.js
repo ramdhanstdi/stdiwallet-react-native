@@ -40,7 +40,7 @@ export const transferTo = createAsyncThunk(
       });
       return results;
     } catch (e) {
-      console.log(e);
+      console.log(e.response.data.massage);
       results.error = e.response.data.massage;
       return results;
     }
