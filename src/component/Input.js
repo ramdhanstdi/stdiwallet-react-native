@@ -1,17 +1,17 @@
-import {View, Text, StyleSheet, Dimensions, TextInput} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import {TEXT_DARK} from '../styles/const';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Input = ({
-  icon,
-  placeholder,
-  type,
-  secure,
-  onChangeText,
-  onBlur,
-  name,
-}) => {
+const Input = ({icon, placeholder, type, onChangeText, onBlur, name}) => {
+  const [show, setShow] = React.useState(true);
   return (
     <View style={styleLocal.wrapForm}>
       <View style={styleLocal.icons}>
@@ -24,9 +24,24 @@ const Input = ({
           style={styleLocal.text}
           placeholder={placeholder}
           type={type}
-          secureTextEntry={secure}
+          secureTextEntry={icon === 'lock' ? show : false}
         />
       </View>
+      {icon === 'lock' ? (
+        show ? (
+          <TouchableOpacity
+            onPress={() => setShow(!show)}
+            style={styleLocal.icons}>
+            <Icon name="eye-slash" size={25} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={() => setShow(!show)}
+            style={styleLocal.icons}>
+            <Icon name="eye" size={25} />
+          </TouchableOpacity>
+        )
+      ) : null}
     </View>
   );
 };
@@ -34,7 +49,8 @@ const Input = ({
 const styleLocal = StyleSheet.create({
   wrapForm: {
     width: Dimensions.get('screen').width,
-    paddingHorizontal: 18,
+    paddingRight: 20,
+    paddingLeft: 10,
     flexDirection: 'row',
     marginTop: 40,
   },

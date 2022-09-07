@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 
 const Main = () => {
   const dispatch = useDispatch();
-  const tokenDevice = useSelector(state => state.token.token);
+  const tokenDevice = useSelector(state => state.token?.token);
   PushNotification.configure({
     onRegister: token => {
       console.log('TOKEN:', token);
@@ -33,7 +33,7 @@ const Main = () => {
       });
     },
   });
-  const token = useSelector(state => state.auth.token);
+  const token = useSelector(state => state.auth?.token);
   return (
     <NavigationContainer>
       {token ? (
