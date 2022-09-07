@@ -72,7 +72,12 @@ const EditProfile = ({navigation}) => {
   };
   const upload = async type => {
     try {
-      const data = type ? await launchImageLibrary() : await launchCamera();
+      const data = type
+        ? await launchImageLibrary()
+        : await launchCamera({
+            maxHeight: 400,
+            maxWidth: 300,
+          });
       const photo = data.assets[0];
       console.log(photo.fileSize);
       if (photo.fileSize > 1000 * 1000) {
@@ -139,7 +144,10 @@ const EditProfile = ({navigation}) => {
           </View>
         </View>
         <Formik
-          initialValues={{first_name: profile.first_name, last_name: profile.last_name}}
+          initialValues={{
+            first_name: profile.first_name,
+            last_name: profile.last_name,
+          }}
           onSubmit={submit}>
           {props => <FormEdit {...props} />}
         </Formik>

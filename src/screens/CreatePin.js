@@ -1,20 +1,10 @@
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  Dimensions,
-  Pressable,
-  TouchableOpacity,
-} from 'react-native';
-import React, {useRef} from 'react';
+import {View, Text, ScrollView, StyleSheet, Dimensions} from 'react-native';
+import React from 'react';
 import Auth from '../component/Auth';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
-import {ErrorMessage, Formik} from 'formik';
+import {Formik} from 'formik';
 import {SECONDARY_COLOR, TEXT_DARK, TEXT_LIGHT} from '../styles/const';
-import * as Yup from 'yup';
 import PinView from 'react-native-pin-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useDispatch, useSelector} from 'react-redux';

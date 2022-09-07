@@ -7,9 +7,7 @@ export const changePin = createAsyncThunk(
   async ({token, request}) => {
     const results = {};
     try {
-      console.log(request);
       const send = qs.stringify(request);
-      console.log('Kambing');
       const {data} = await http(token).patch('/changePin', send);
       console.log(data);
       results.data = data.result;

@@ -100,28 +100,30 @@ const TopUp = () => {
         />
       </ScrollView>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={show}
         onRequestClose={() => setShow(!show)}>
-        <View style={styleLocal.wrapModal}>
-          <Text style={styleLocal.titleModal}>Input Amount Here</Text>
-          <TextInput
-            style={styleLocal.input}
-            keyboardType="decimal-pad"
-            placeholder="Min 20000"
-            value={amount}
-            onChangeText={setAmount}
-          />
-          <View style={styleLocal.wrapButton}>
-            <TouchableOpacity
-              style={styleLocal.cancel}
-              onPress={() => setShow(!show)}>
-              <Text style={styleLocal.acount}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styleLocal.topUp} onPress={() => submit()}>
-              <Text style={styleLocal.acount}>Top Up</Text>
-            </TouchableOpacity>
+        <View style={styleLocal.modal}>
+          <View style={styleLocal.wrapModal}>
+            <Text style={styleLocal.titleModal}>Input Amount Here</Text>
+            <TextInput
+              style={styleLocal.input}
+              keyboardType="decimal-pad"
+              placeholder="Min 20000"
+              value={amount}
+              onChangeText={setAmount}
+            />
+            <View style={styleLocal.wrapButton}>
+              <TouchableOpacity
+                style={styleLocal.cancel}
+                onPress={() => setShow(!show)}>
+                <Text style={styleLocal.acount}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styleLocal.topUp} onPress={() => submit()}>
+                <Text style={styleLocal.acount}>Top Up</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -132,6 +134,10 @@ const TopUp = () => {
 export default TopUp;
 
 const styleLocal = StyleSheet.create({
+  modal: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    flex: 1,
+  },
   cancel: {
     height: 30,
     backgroundColor: WARNING_COLOR,

@@ -5,7 +5,7 @@ import Input from '../component/Input';
 import styles from '../styles/global';
 import ButtonAuth from '../component/ButtonAuth';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { SUCCESS_COLOR } from '../styles/const';
+import {SUCCESS_COLOR} from '../styles/const';
 
 const CreatePinSuccess = ({navigation}) => {
   return (
@@ -20,10 +20,16 @@ const CreatePinSuccess = ({navigation}) => {
             <Text style={styles.authTitle}>PIN Successfully Created</Text>
           </View>
           <Text style={styles.textSmall}>
-          Your PIN was successfully created and you can now access all the features in iWallet. Login to your new account and start exploring!
-          <Text>{'\n'}</Text>
+            Your PIN was successfully created and you can now access all the
+            features in iWallet. Login to your new account and start exploring!
+            <Text>{'\n'}</Text>
           </Text>
-          <ButtonAuth style={styles.button} action={navigation.navigate('Login')} title="submit" text="Login Now" />
+          <ButtonAuth
+            style={styles.button}
+            action={() => navigation.navigate('Login')}
+            title="submit"
+            text="Login Now"
+          />
         </View>
       </ScrollView>
     </>

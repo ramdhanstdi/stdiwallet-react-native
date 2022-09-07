@@ -5,13 +5,19 @@ import {Formik} from 'formik';
 import styles from '../styles/global';
 import {useDispatch} from 'react-redux';
 import {setpin} from '../redux/reducers/changePin';
+import {CommonActions} from '@react-navigation/native';
 
 const ChangePin = ({navigation}) => {
   const dispatch = useDispatch();
   const [pin, setPin] = React.useState('');
   const onSubmit = val => {
     dispatch(setpin(pin));
-    navigation.navigate('New Pin');
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{name: 'HomeTab'}, {name: 'New Pin'}],
+      }),
+    );
   };
   return (
     <>

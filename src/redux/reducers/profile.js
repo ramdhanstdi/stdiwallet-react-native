@@ -22,6 +22,7 @@ export const profile = createSlice({
   reducers: {
     resetmsg: state => {
       state.successmsg = null;
+      state.errormsg = null;
     },
   },
   extraReducers: build => {
@@ -90,6 +91,7 @@ export const profile = createSlice({
     });
     build.addCase(changePass.fulfilled, (state, action) => {
       const successmsg = action.payload?.massage;
+      state.errormsg = action.payload?.error;
       if (successmsg) {
         state.successmsg = successmsg;
       }

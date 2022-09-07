@@ -70,6 +70,7 @@ const ChangePass = ({navigation}) => {
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
   const successmsg = useSelector(state => state.profile.successmsg);
+  const errormsg = useSelector(state => state.profile.errormsg);
   const [warning, setWarning] = React.useState('');
   const submit = val => {
     const request = {
@@ -79,6 +80,7 @@ const ChangePass = ({navigation}) => {
     };
     if (val.newpassword !== val.confirmpassword) {
       setWarning('New Password Not Match');
+      setTimeout(() => setWarning(''), 3 * 1000);
     } else {
       dispatch(changePass({token, request}));
     }
@@ -87,7 +89,13 @@ const ChangePass = ({navigation}) => {
     if (successmsg) {
       setTimeout(() => dispatch(resetmsg()), 3 * 1000);
     }
-  }, [successmsg]);
+    if (errormsg) {
+      setWarning(errormsg);
+      setTimeout(() => dispatch(resetmsg()), 3 * 1000);
+    } else {
+      setWarning('');
+    }
+  }, [successmsg, errormsg]);
   return (
     <>
       {warning && <Text style={styles.warning}>{warning}</Text>}

@@ -19,14 +19,14 @@ const ConfimPin = ({navigation}) => {
     dispatch(changePin({token, request}));
   };
   React.useEffect(() => {
-    if (errormsg) {
+    if (errormsg || successmsg) {
       setTimeout(() => dispatch(resetmsg()), 3000);
     }
   }, [errormsg, successmsg]);
   return (
     <>
       {errormsg && <Text style={styles.warning}>{errormsg}</Text>}
-      {successmsg && <Text style={styleLocal.successmsg}>{successmsg}</Text>}
+      {successmsg && <Text style={styles.successmsg}>{successmsg}</Text>}
       <View style={styleLocal.wrap}>
         <Text style={styles.smallText}>
           Type your new 6 digits security PIN to use in STD iWallet.

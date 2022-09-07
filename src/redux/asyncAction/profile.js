@@ -88,8 +88,9 @@ export const changePass = createAsyncThunk(
       results.massage = data.massage;
       return results;
     } catch (e) {
-      console.log(e);
-      return e;
+      console.log(e.response.data.massage);
+      results.error = e.response.data.massage;
+      return results;
     }
   },
 );

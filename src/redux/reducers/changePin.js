@@ -26,7 +26,7 @@ const pinChange = createSlice({
     });
     build.addCase(changePin.fulfilled, (state, action) => {
       state.successmsg = action.payload?.massage;
-      state.errormsg = action.payload?.massage;
+      state.errormsg = action.payload?.error;
     });
   },
 });
