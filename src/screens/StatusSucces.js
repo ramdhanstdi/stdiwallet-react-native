@@ -41,7 +41,7 @@ const StatusSucces = ({navigation}) => {
         <View style={styleLocal.side}>
           <View style={styleLocal.wrapper}>
             <View style={styleLocal.wrapLeft}>
-              {Image ? (
+              {image ? (
                 <Image source={{uri: image, width: 50, height: 50}} />
               ) : (
                 <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
