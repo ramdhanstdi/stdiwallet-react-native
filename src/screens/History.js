@@ -11,7 +11,6 @@ import {
 } from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {getHistory} from '../redux/asyncAction/transaction';
-import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 
 const History = () => {
   const dispatch = useDispatch();
@@ -39,7 +38,7 @@ const History = () => {
   return (
     <>
       <View style={styleLocal.wrap}>
-        <Text style={styles.text14px}>This Month</Text>
+        <Text style={styles.text14px}></Text>
       </View>
       <FlatList
         onRefresh={() => onRefresh()}

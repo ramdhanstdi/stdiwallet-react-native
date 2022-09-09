@@ -20,22 +20,32 @@ import {useSelector} from 'react-redux';
 
 const Card = ({item}) => {
   const id = useSelector(state => state.auth.id);
+  const profile = useSelector(state => state.profile.data);
   return (
     <View style={styleLocal.wrapper}>
       <View style={styleLocal.wrapLeft}>
-        {item.profile_photo ? (
+        {item.profile_photo || item.photorec ? (
           <Image
             style={styleLocal.pic}
-            source={{uri: item.profile_photo, width: 50, height: 50}}
+            source={{
+              uri: item.profile_photo || item.photorec,
+              width: 50,
+              height: 50,
+            }}
           />
         ) : (
           <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
         )}
         <View style={styleLocal.wrapText}>
-          <Text
-            style={
-              styleLocal.textName
-            }>{`${item.first_name} ${item.last_name}`}</Text>
+          {id !== item.receiver_id ? (
+            <Text style={styleLocal.textName}>{`${
+              item.firstnamerec || profile.first_name
+            } ${item.lastnamerec || profile.last_name}`}</Text>
+          ) : (
+            <Text style={styleLocal.textName}>{`${
+              item.first_name || profile.first_name
+            } ${item.last_name || profile.last_name}`}</Text>
+          )}
           {item.transfertype ? (
             <Text style={styles.text14px}>{item.transfertype}</Text>
           ) : (

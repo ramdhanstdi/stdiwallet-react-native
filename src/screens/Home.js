@@ -30,12 +30,12 @@ const Home = ({navigation}) => {
     dispatch(getHistory({token}));
     if (tokenDevice) {
       const user_id = id;
-      const token = tokenDevice;
-      dispatch(editToken({token, user_id}));
+      const tokend = tokenDevice;
+      dispatch(editToken({token: tokend, user_id}));
     } else {
       const user_id = id;
-      const token = tokenDevice;
-      const request = {token, user_id};
+      const tokend = tokenDevice;
+      const request = {token: tokend, user_id};
       dispatch(saveToken(request));
     }
   }, []);
