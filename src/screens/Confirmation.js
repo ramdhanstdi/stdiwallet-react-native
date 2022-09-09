@@ -19,6 +19,7 @@ import {getToken} from '../redux/asyncAction/token';
 
 const Confirmation = ({navigation}) => {
   const dispatch = useDispatch();
+  const [warning, setWarning] = React.useState(false);
   const token = useSelector(state => state.auth.token);
   const profile = useSelector(state => state.profile.data);
   const name = useSelector(state => state.transaction.name);
@@ -32,7 +33,12 @@ const Confirmation = ({navigation}) => {
   const onSubmit = val => {
     dispatch(getdate(date));
     dispatch(getToken(receiver));
-    navigation.navigate('Enter Your Pin');
+    if (profile.balance - amount < 0) {
+      setWarning(true);
+      setTimeout(() => setWarning(false), 3 * 3000);
+    } else {
+      navigation.navigate('Enter Your Pin');
+    }
   };
   React.useEffect(() => {
     dispatch(resetmsg());
@@ -40,6 +46,7 @@ const Confirmation = ({navigation}) => {
   }, []);
   return (
     <>
+      {warning && <Text style={styles.warning}>Amount is Not Enough</Text>}
       <View style={styleLocal.wrapper}>
         <View style={styleLocal.wrapLeft}>
           {image ? (
