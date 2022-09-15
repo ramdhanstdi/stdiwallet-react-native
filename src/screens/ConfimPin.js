@@ -18,6 +18,9 @@ const ConfimPin = ({navigation}) => {
     const request = {oldPin, newPin};
     dispatch(changePin({token, request}));
   };
+  if (errormsg) {
+    setTimeout(() => navigation.navigate('Change Pin'), 3500);
+  }
   React.useEffect(() => {
     if (errormsg || successmsg) {
       setTimeout(() => dispatch(resetmsg()), 3000);
