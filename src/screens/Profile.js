@@ -3,6 +3,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Switch,
   Text,
   TouchableOpacity,
   View,
@@ -10,17 +11,28 @@ import {
 import React from 'react';
 import {DEFAULT_IMG} from '../assets/defaultimg';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {CARD_COLOR, TEXT_DARK} from '../styles/const';
+import {CARD_COLOR, SECONDARY_COLOR, TEXT_DARK} from '../styles/const';
 import {useDispatch, useSelector} from 'react-redux';
 import {getUserLogin} from '../redux/asyncAction/profile';
 import {logOut} from '../redux/reducers/auth';
 import {editToken} from '../redux/asyncAction/token';
 
 const CardProfile = ({text, icon, action}) => {
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   return (
     <TouchableOpacity onPress={action} style={styleLocal.card}>
       <Text style={styleLocal.textCard}>{text}</Text>
       <Icon name={icon} size={20} color={TEXT_DARK} />
+      {text === 'Notification' ? (
+        <Switch
+          trackColor={{false: '#767577', true: TEXT_DARK}}
+          thumbColor={isEnabled ? SECONDARY_COLOR : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+        />
+      ) : null}
     </TouchableOpacity>
   );
 };

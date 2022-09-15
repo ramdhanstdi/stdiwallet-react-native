@@ -19,10 +19,11 @@ const EnterPin = ({navigation}) => {
   const receiver = useSelector(state => state.transaction.receiver);
   const successmsg = useSelector(state => state.transaction.successmsg);
   const errormsg = useSelector(state => state.transaction.errormsg);
-  const receiverToken = useSelector(state => state.token.receiverToken);
-  console.log('INI DISINI', receiverToken);
+  const altToken = 'coWOurJTQsWCCNgLvZrkDu:APA91bEYbVkVNX9o-CMGaGfwGgGFfAcQWcauoIcHldZOitKJdmDGiRap5wxmRWZsPWU_cEK1UMT9fj08C7-mGYBR66lsPvAuwuL0-f8Maja-uU4KVu_BxNVYuT0rZH85X1tgoxLX6TnH'
+  const recToken = useSelector(state => state.token.receiverToken);
   const [pin, setPin] = React.useState('');
   const onSubmit = val => {
+    const receiverToken = recToken ? recToken : altToken;
     const name = profile.first_name + ' ' + profile.last_name;
     const msg = `${name} Send Money To You Rp.${amount}`;
     const request = {time, amount, notes, receiver, pin, receiverToken, msg};

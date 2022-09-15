@@ -37,9 +37,6 @@ const History = () => {
   }, [sort]);
   return (
     <>
-      <View style={styleLocal.wrap}>
-        <Text style={styles.text14px}></Text>
-      </View>
       <FlatList
         onRefresh={() => onRefresh()}
         refreshing={false}

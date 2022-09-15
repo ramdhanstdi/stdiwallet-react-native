@@ -11,7 +11,6 @@ import {
   CARD_COLOR,
   SUCCESS_COLOR,
   TEXT_DARK,
-  TEXT_LIGHT,
   WARNING_COLOR,
 } from '../styles/const';
 import {DEFAULT_IMG} from '../assets/defaultimg';
@@ -24,11 +23,31 @@ const Card = ({item}) => {
   return (
     <View style={styleLocal.wrapper}>
       <View style={styleLocal.wrapLeft}>
-        {item.profile_photo || item.photorec ? (
+        {item.receiver_id ? (
+          id === item.receiver_id ? (
+            <Image
+              style={styleLocal.pic}
+              source={{
+                uri: item.profile_photo || item.photorec || DEFAULT_IMG,
+                width: 50,
+                height: 50,
+              }}
+            />
+          ) : (
+            <Image
+              style={styleLocal.pic}
+              source={{
+                uri: item.photorec || DEFAULT_IMG,
+                width: 50,
+                height: 50,
+              }}
+            />
+          )
+        ) : item.profile_photo ? (
           <Image
             style={styleLocal.pic}
             source={{
-              uri: item.profile_photo || item.photorec,
+              uri: item.profile_photo,
               width: 50,
               height: 50,
             }}
@@ -37,14 +56,21 @@ const Card = ({item}) => {
           <Image source={{uri: DEFAULT_IMG, width: 50, height: 50}} />
         )}
         <View style={styleLocal.wrapText}>
-          {id !== item.receiver_id ? (
-            <Text style={styleLocal.textName}>{`${
-              item.firstnamerec || profile.first_name
-            } ${item.lastnamerec || profile.last_name}`}</Text>
+          {item.receiver_id ? (
+            id !== item.receiver_id ? (
+              <Text style={styleLocal.textName}>{`${
+                item.firstnamerec || profile.first_name
+              } ${item.lastnamerec || profile.last_name}`}</Text>
+            ) : (
+              <Text style={styleLocal.textName}>{`${
+                item.first_name || profile.first_name
+              } ${item.last_name || profile.last_name}`}</Text>
+            )
           ) : (
-            <Text style={styleLocal.textName}>{`${
-              item.first_name || profile.first_name
-            } ${item.last_name || profile.last_name}`}</Text>
+            <Text
+              style={
+                styleLocal.textName
+              }>{`${item.first_name} ${item.last_name}`}</Text>
           )}
           {item.transfertype ? (
             <Text style={styles.text14px}>{item.transfertype}</Text>
